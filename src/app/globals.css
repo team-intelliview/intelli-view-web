@@ -1,0 +1,80 @@
+@import 'tailwindcss';
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable-dynamic-subset.css');
+
+@theme {
+  --text-title1: 28px;
+  --text-title2: 26px;
+  --text-title3: 24px;
+  --text-heading1: 22px;
+  --text-heading2: 20px;
+  --text-headline1: 18px;
+  --text-headline2: 17px;
+  --text-body1: 16px;
+  --text-body2: 15px;
+  --text-label: 12px;
+
+  --color-gray-100: #333d4b;
+  --color-gray-90: #4e5968;
+  --color-gray-80: #717a86;
+  --color-gray-70: #959ba4;
+  --color-gray-60: #a6acb3;
+  --color-gray-50: #b8bdc3;
+  --color-gray-40: #cacdd2;
+  --color-gray-30: #dcdee1;
+  --color-gray-20: #edeef0;
+  --color-gray-10: #f6f7f7;
+  --color-gray-0: #f9fafb;
+
+  --color-primary-100: #1f80ff;
+  --color-primary-90: #4c9aff;
+  --color-primary-80: #79b3ff;
+  --color-primary-70: #a5ccff;
+  --color-primary-60: #d2e6ff;
+  --color-primary-50: #e9f2ff;
+  --color-primary-40: #f4f9ff;
+
+  --color-red: #db4f3f;
+  --color-green: #17b269;
+  --color-purple: #a06ee4;
+  --color-blue: #1d559e;
+
+  --color-light: #f1f1f1;
+
+  --font-pretendard: 'Pretendard', 'sans-serif';
+}
+
+:root {
+  font-family:
+    'Pretendard Variable',
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    Roboto,
+    'Helvetica Neue',
+    'Segoe UI',
+    'Apple SD Gothic Neo',
+    'Noto Sans KR',
+    'Malgun Gothic',
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
+    sans-serif;
+  font-size: 14px;
+  color: #4e5968;
+}
+
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari, and Opera */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge, and Firefox */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+}
