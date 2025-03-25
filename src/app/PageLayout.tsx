@@ -1,16 +1,17 @@
+import HomeNav from '@/components/Nav/HomeNav';
 import { cn } from '../utils/string';
 
 interface PageProps {
-  nav?: boolean;
-  footer?: boolean;
+  homeNav?: boolean;
   className?: string;
   children: React.ReactNode;
 }
 
-export default function Page({ className, children }: PageProps) {
+export default function Page({ homeNav, className, children }: PageProps) {
   return (
     <>
-      <div className={cn('py-[64px]', className)}>{children}</div>
+      {homeNav && <HomeNav />}
+      <div className={cn('mt-[64px]', className)}>{children}</div>
     </>
   );
 }
