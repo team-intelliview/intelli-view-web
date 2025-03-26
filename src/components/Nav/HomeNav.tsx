@@ -1,9 +1,9 @@
-import Navigation from '../Navigation';
 import Image from 'next/image';
+import Navigation from './Navigation';
 
 export default function HomeNav() {
   return (
-    <Navigation className="flex place-content-end items-center px-[60px]">
+    <Navigation className="absolute flex place-content-end items-center px-[60px]">
       <div className="flex gap-[12px]">
         <Image
           width={36}
