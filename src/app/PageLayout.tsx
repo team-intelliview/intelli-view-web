@@ -11,7 +11,7 @@ export default function Page({ homeNav, className, children }: PageProps) {
   return (
     <>
       {homeNav && <HomeNav />}
-      <div className={cn('mt-[64px]', className)}>{children}</div>
+      <div className={cn('min-h-screen', className)}>{children}</div>
     </>
   );
 }
