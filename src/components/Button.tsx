@@ -23,7 +23,7 @@ export default function Button({
         size === 'sm' && 'h-[39px] w-[106px]',
         size === 'lg' && 'h-[48px] w-[173px]',
         variant === 'secondary' &&
-          'bg-gray-10 hover:bg-gray-40 disabled:text-gray-40 disabled:hover:bg-gray-10',
+          'bg-gray-10 hover:bg-gray-40 text-gray-90 disabled:text-gray-40 disabled:hover:bg-gray-10',
         variant === 'primary' &&
           'bg-primary-90 disabled:bg-primary-60 disabled:hover:bg-primary-60 hover:bg-blue-dim text-white',
         variant === 'start' &&
@@ -31,9 +31,8 @@ export default function Button({
         variant === 'stop' &&
           'bg-red disabled:hover:bg-red hover:bg-red-dim text-white hover:text-white',
         sort === 'chip' &&
-          'border-primary-90 text-body1 h-fit w-fit rounded-[30px] px-[16px] py-[8px]',
-        sort === 'default' &&
-          'text-body2 rounded-[12px] font-semibold text-white',
+          'border-primary-90 text-body1 h-fit w-fit rounded-[30px] px-[16px] py-[8px] text-white',
+        sort === 'default' && 'text-body2 rounded-[12px] font-semibold',
         className,
       )}
       {...rest}

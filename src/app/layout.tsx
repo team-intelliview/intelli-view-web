@@ -17,9 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className="scrollbar-hide flex min-h-screen flex-col">
-        {children}
-      </body>
+      <body className="scrollbar-hide flex flex-col">{children}</body>
     </html>
   );
 }

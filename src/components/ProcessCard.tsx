@@ -1,4 +1,5 @@
 import { cn } from '@/utils/string';
+import dayjs from 'dayjs';
 import Image from 'next/image';
 
 interface ProcessCardProps {
@@ -27,7 +28,7 @@ export default function ProcessCard({
   className,
 }: ProcessCardProps) {
   return (
-    <div className="relative h-fit w-[505px]">
+    <div className="relative h-fit">
       <div
         className={cn(
           'absolute top-0 left-0 h-full w-[6px] rounded-l-[12px]',
@@ -36,7 +37,7 @@ export default function ProcessCard({
       />
       <div
         className={cn(
-          'shadow1 border-light flex w-[499px] items-start gap-[24px] rounded-r-[20px] border p-[20px]',
+          'shadow1 border-light flex items-start gap-[24px] rounded-r-[20px] border p-[20px]',
           className,
         )}
       >
@@ -80,7 +81,10 @@ export default function ProcessCard({
                   질문<span className="ml-[8px]">{question}</span>
                 </p>
                 <p className="text-body1 font-regular text-gray-80">
-                  응답일<span className="ml-[8px]">{response}</span>
+                  응답일
+                  <span className="ml-[8px]">
+                    {dayjs(response).format('YYYY.MM.DD')}
+                  </span>
                 </p>
               </>
             ) : (
