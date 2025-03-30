@@ -38,6 +38,7 @@ export default function Textfield({
         id={id}
         value={value}
         onChange={onChange}
+        placeholder={placeholder}
         className={cn(
           'border-light caret-primary-100 min-h-[228px] resize-none rounded-[12px] border-2 px-[20px] pt-[24px] pb-[32px] focus:outline-none',
           textareaClassName,
@@ -45,7 +46,9 @@ export default function Textfield({
         {...rest}
       />
       <div className="flex justify-between">
-        <p className="text-red text-body1">{errorMessage}</p>
+        {String(value).length > maxLength && (
+          <p className="text-red text-body1">{errorMessage}</p>
+        )}
         {maxLength && (
           <div className="text-body1 flex whitespace-pre">
             <span>{String(value).length} / </span>

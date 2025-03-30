@@ -4,7 +4,6 @@ import Image from 'next/image';
 
 interface TextboxProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
-  question?: string;
   labelClassName?: string;
   inputClassName?: string;
   maxLength?: number;
@@ -17,7 +16,6 @@ interface TextboxProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 export default function Textbox({
   id,
   label,
-  question,
   value,
   labelClassName,
   inputClassName,
