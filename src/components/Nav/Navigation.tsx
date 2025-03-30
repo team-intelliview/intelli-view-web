@@ -37,7 +37,7 @@ export default function Navigation({ children, className }: NavigationProps) {
         className,
       )}
     >
-      <div className="flex">{children}</div>
+      {children}
     </nav>
   );
 }

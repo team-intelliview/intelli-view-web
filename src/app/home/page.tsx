@@ -10,6 +10,7 @@ import { useModalState } from '@/hooks';
 
 export default function Home() {
   const { isOpen } = useModalState({ key: MODAL.INTERVIEW_PROGRESS });
+
   return (
     <>
       <PageLayout homeNav className="flex max-w-screen overflow-hidden">
