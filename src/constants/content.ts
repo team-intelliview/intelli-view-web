@@ -9,6 +9,9 @@ export const INTERVIEW_OPTION = {
 } as const;
 
 export const DOCS_MAX_LENGTH = {
+  EDUCATION: 1500,
+  HISTORY: 1500,
+  PREMIER: 1500,
   COMPONY: 100,
   JOB: 100,
   JD: 1500,
