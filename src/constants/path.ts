@@ -7,5 +7,7 @@ export const PATH = {
   COVER_LETTER: '/cover-letter',
   RESUME: '/resume',
   INTERVIEW: '/interview',
-  CHECK: '/check',
+  CHECK_VOICE: '/check-voice',
+  CHECK_CAMERA: '/check-camera',
+  REPORT:'/report'
 };

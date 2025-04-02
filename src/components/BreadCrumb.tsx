@@ -28,16 +28,19 @@ export default function BreadCrumb() {
     switch (pathname) {
       case PATH.WRITE_SORT:
       case PATH.JOB_DESCRIPTION:
-        setIsNow(0);
-        break;
       case PATH.QUESTIONS:
       case PATH.COVER_LETTER:
-        setIsNow(1);
+        setIsNow(0);
         break;
       case PATH.COVER_LETTER:
-        setIsNow(2);
+      case PATH.CHECK_VOICE:
+      case PATH.CHECK_CAMERA:
+        setIsNow(1);
         break;
-      case PATH.CHECK:
+      case PATH.INTERVIEW:
+        setIsNow(3);
+        break;
+      case PATH.REPORT:
         setIsNow(Process[type].length - 1);
         break;
     }
