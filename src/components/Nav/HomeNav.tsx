@@ -1,9 +1,29 @@
+'use client';
+
 import Image from 'next/image';
 import Navigation from './Navigation';
+import { PATH } from '@/constants';
+import Link from 'next/link';
+import BreadCrumb from '../BreadCrumb';
 
-export default function HomeNav() {
+interface HomeNavProps {
+  breadCrumb?: boolean;
+}
+
+export default function HomeNav({ breadCrumb = false }: HomeNavProps) {
   return (
-    <Navigation className="absolute flex place-content-end items-center px-[60px]">
+    <Navigation className="absolute flex w-full items-center justify-between px-[60px]">
+      <Link href={PATH.HOME}>
+        <Image
+          src="/logo.svg"
+          alt="logo"
+          height={24}
+          width={24}
+          className="h-[24px] w-auto"
+          priority
+        />
+      </Link>
+      {breadCrumb && <BreadCrumb />}
       <div className="flex gap-[12px]">
         <Image
           width={36}

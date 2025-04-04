@@ -5,12 +5,18 @@ interface PageProps {
   homeNav?: boolean;
   className?: string;
   children: React.ReactNode;
+  breadCrumb?: boolean;
 }
 
-export default function Page({ homeNav, className, children }: PageProps) {
+export default function Page({
+  homeNav,
+  className,
+  children,
+  breadCrumb,
+}: PageProps) {
   return (
     <>
-      {homeNav && <HomeNav />}
+      {homeNav && <HomeNav breadCrumb={breadCrumb} />}
       <div className={cn('min-h-screen', className)}>{children}</div>
     </>
   );

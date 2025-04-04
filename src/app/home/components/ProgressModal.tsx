@@ -1,8 +1,21 @@
+'use client';
+
 import Modal from '@/components/Modal';
 import ModuleButton from '@/components/ModuleButton';
-import { MODAL } from '@/constants';
+import { INTERVIEW_OPTION, MODAL, PATH } from '@/constants';
+import { useContent } from '@/hooks';
+import { InterviewOption } from '@/types';
+import { useRouter } from 'next/navigation';
 
 export default function ProgressModal() {
+  const router = useRouter();
+  const { changeInterviewType } = useContent();
+
+  const handleInterviewTypeClick = (type: InterviewOption) => {
+    changeInterviewType(type);
+    router.push(PATH.WRITE_SORT);
+  };
+
   return (
     <Modal
       modalKey={MODAL.INTERVIEW_PROGRESS}
@@ -20,12 +33,12 @@ export default function ProgressModal() {
         <ModuleButton
           text="대면으로 진행해요"
           icon="🏢"
-          onClick={() => console.log('대면')}
+          onClick={() => handleInterviewTypeClick(INTERVIEW_OPTION.ONLINE)}
         />
         <ModuleButton
           text="비대면으로 진행해요"
           icon="💻"
-          onClick={() => console.log('비대면')}
+          onClick={() => handleInterviewTypeClick(INTERVIEW_OPTION.OFFLINE)}
         />
       </div>
     </Modal>

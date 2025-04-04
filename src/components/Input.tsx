@@ -44,7 +44,9 @@ export default function Input({
         {...rest}
       />
       <div className="flex justify-between">
-        <p className="text-red text-body1">{errorMessage}</p>
+        {String(value).length > maxLength && (
+          <p className="text-red text-body1">{errorMessage}</p>
+        )}
         {maxLength && (
           <div className="text-body1 flex whitespace-pre">
             <span>{String(value).length} / </span>

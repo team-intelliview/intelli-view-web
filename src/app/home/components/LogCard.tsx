@@ -3,33 +3,29 @@
 import Button from '@/components/Button';
 import Card from '@/components/Card';
 import ProcessCard from '@/components/ProcessCard';
-import { MODAL, PATH, REQUEST_OPTION } from '@/constants';
-import { useModal } from '@/hooks';
+import { MODAL, REQUEST_OPTION } from '@/constants';
+import { useContent, useModal } from '@/hooks';
 import { contentCardList } from '@/mocks';
-import type { RequestItem } from '@/types';
+import type { RequestOption } from '@/types';
 import { cn, toKoreanRequestType } from '@/utils';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 
 interface Props {
-  type: RequestItem;
+  type: RequestOption;
 }
 
 export default function LogCard({ type }: Props) {
+  const { changeType } = useContent();
   const { openModal } = useModal();
-  const router = useRouter();
 
-  const buttonText =
-    type === REQUEST_OPTION.INTERVIEW ? '면접 진행하기' : '작성 진행하기';
   const titleIcon =
     type === REQUEST_OPTION.INTERVIEW
       ? '/icons/message.svg'
       : '/icons/paper.svg';
 
-  const handleClickProgressButton = () => {
-    type === REQUEST_OPTION.INTERVIEW
-      ? openModal(MODAL.INTERVIEW_PROGRESS)
-      : router.push(PATH.COVER_LETTER);
+  const handleProcessClick = () => {
+    changeType(type);
+    openModal(MODAL.INTERVIEW_PROGRESS);
   };
 
   return (
@@ -37,13 +33,13 @@ export default function LogCard({ type }: Props) {
       <div className="flex justify-between pb-[28px]">
         <p className="text-heading1 text-gray-80 flex items-center gap-[4px] font-semibold">
           <Image width={24} height={24} src={titleIcon} alt="title" />
-          {toKoreanRequestType(type)}
+          {toKoreanRequestType({ type })}
         </p>
         <Button
           variant="secondary"
           size="sm"
-          text={buttonText}
-          onClick={handleClickProgressButton}
+          text="진행하기"
+          onClick={handleProcessClick}
         />
       </div>
       <div className="scrollbar-hide flex h-full w-full flex-col gap-[20px] overflow-y-scroll">
@@ -78,6 +74,8 @@ export default function LogCard({ type }: Props) {
 }
 
 function EmptyContent({ type }: Props) {
+  const { changeType } = useContent();
+
   const iconImage =
     type === REQUEST_OPTION.INTERVIEW
       ? '/icons/message_blink.svg'
@@ -102,6 +100,7 @@ function EmptyContent({ type }: Props) {
       <button
         type="button"
         className="flex gap-4 px-[12px] py-[6px] hover:cursor-pointer"
+        onClick={() => changeType(type)}
       >
         <Image src="/icons/plus.svg" alt="plus" width={20} height={20} />
         <p>{buttonText}</p>

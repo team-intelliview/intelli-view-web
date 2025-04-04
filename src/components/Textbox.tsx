@@ -1,10 +1,9 @@
 import { cn } from '@/utils/string';
-import { TextareaHTMLAttributes } from 'react';
+import { Children, TextareaHTMLAttributes, useState } from 'react';
 import Image from 'next/image';
 
 interface TextboxProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
-  question?: string;
   labelClassName?: string;
   inputClassName?: string;
   maxLength?: number;
@@ -12,12 +11,12 @@ interface TextboxProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   placeholder?: string;
   className?: string;
   editButtonClick?: () => void;
+  children?: React.ReactNode;
 }
 
 export default function Textbox({
   id,
   label,
-  question,
   value,
   labelClassName,
   inputClassName,
@@ -27,8 +26,10 @@ export default function Textbox({
   placeholder,
   className,
   editButtonClick,
+  children,
   ...rest
 }: TextboxProps) {
+
   return (
     <div
       className={cn(
@@ -74,6 +75,7 @@ export default function Textbox({
         {...rest}
       />
       <p className="text-red text-body1">{errorMessage}</p>
+      {children}
     </div>
   );
 }
