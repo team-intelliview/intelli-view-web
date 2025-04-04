@@ -15,7 +15,7 @@ export default function HomeNav({ breadCrumb = false }: HomeNavProps) {
     <Navigation className="absolute flex w-full items-center justify-between px-[60px]">
       <Link href={PATH.HOME}>
         <Image
-          src="/favicon.ico"
+          src="/logo.svg"
           alt="logo"
           height={24}
           width={24}
