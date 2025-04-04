@@ -20,16 +20,12 @@ export default function Textfield({
   labelClassName,
   textareaClassName,
   errorMessage,
+  onChange,
   maxLength,
   placeholder,
   className,
   ...rest
 }: TextfieldProps) {
-  const [text, setText] = useState(value || '');
-  const handleTextfieldChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setText(e.target.value);
-  };
-
   return (
     <div className={cn('flex flex-col gap-[8px]', className)}>
       {label && (
@@ -42,23 +38,23 @@ export default function Textfield({
       )}
       <textarea
         id={id}
-        value={text}
-        onChange={(e) => handleTextfieldChange(e)}
+        value={value}
+        onChange={onChange}
         placeholder={placeholder}
         className={cn(
           'border-light caret-primary-100 min-h-[228px] resize-none rounded-[12px] border-2 px-[20px] pt-[24px] pb-[32px] focus:outline-none',
           textareaClassName,
-          !text && 'bg-gray-0',
+          !value && 'bg-gray-0',
         )}
         {...rest}
       />
       <div className="flex justify-between">
-        {String(text).length > maxLength && (
+        {String(value).length > maxLength && (
           <p className="text-red text-body1">{errorMessage}</p>
         )}
         {maxLength && (
           <div className="text-body1 flex whitespace-pre">
-            <span>{String(text).length} / </span>
+            <span>{String(value).length} / </span>
             <span className="text-gray-60">{maxLength}자</span>
           </div>
         )}

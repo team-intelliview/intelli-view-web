@@ -29,10 +29,6 @@ export default function Textbox({
   children,
   ...rest
 }: TextboxProps) {
-  const [text, setText] = useState(value || '');
-  const handleTextboxChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setText(e.target.value);
-  };
 
   return (
     <div
@@ -69,8 +65,8 @@ export default function Textbox({
       </div>
       <textarea
         id={id}
-        value={text}
-        onChange={(e) => handleTextboxChange(e)}
+        value={value}
+        onChange={onChange}
         className={cn(
           'border-gray-40 !text-gray-80 text-headline1 caret-primary-100 h-fit w-full resize-none border-b font-medium focus:outline-none',
           inputClassName,
