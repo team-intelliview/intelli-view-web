@@ -15,4 +15,8 @@ export const DOCS_MAX_LENGTH = {
   COMPONY: 100,
   JOB: 100,
   JD: 1500,
-};
+} as const;
+
+export const COVER_LETTER_MAX_LENGTH = {
+  ANSWER: 1500,
+} as const;

@@ -20,7 +20,21 @@ export function useContent() {
     [setContent],
   );
 
-  return { changeType, changeInterviewType };
+  const changeJob = useCallback(
+    (job: string) => {
+      setContent({ key: 'job', value: job });
+    },
+    [setContent],
+  );
+
+  const changeCompony = useCallback(
+    (compony: string) => {
+      setContent({ key: 'compony', value: compony });
+    },
+    [setContent],
+  );
+
+  return { changeType, changeInterviewType, changeJob, changeCompony };
 }
 
 export function useContentState() {

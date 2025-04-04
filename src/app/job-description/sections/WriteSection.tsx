@@ -10,11 +10,12 @@ export default function WriteSection() {
   const router = useRouter();
 
   const [jd, setJd] = useState('');
+
   const handleBackClick = () => {
     router.push(PATH.RESUME);
   };
   const handleNextClick = () => {
-    router.push(PATH.QUESTIONS);
+    router.push(PATH.COVER_LETTER);
   };
 
   return (
@@ -32,7 +33,7 @@ export default function WriteSection() {
         className="flex justify-end pt-[20px] pb-[48px]"
         back={handleBackClick}
         isAbleBack={true}
-        isAbleNext={true}
+        isAbleNext={jd.length < DOCS_MAX_LENGTH.JD && jd.length > 0}
         next={handleNextClick}
       />
     </div>
