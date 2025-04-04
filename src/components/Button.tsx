@@ -1,5 +1,6 @@
 import { cn } from '@/utils/string';
 import { ButtonHTMLAttributes } from 'react';
+import Image from 'next/image';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
@@ -7,6 +8,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'start' | 'stop';
   sort?: 'default' | 'chip';
   selected?: boolean;
+  icon?: string;
 }
 
 const buttonSizes = {
@@ -21,8 +23,8 @@ const buttonVariants = {
   secondary:
     'bg-gray-10 hover:bg-gray-40 text-gray-90 disabled:text-gray-40 disabled:hover:bg-gray-10',
   start:
-    'bg-green disabled:bg-green/40 disabled:hover:bg-green/40 hover:bg-green-dim text-white',
-  stop: 'bg-red disabled:hover:bg-red hover:bg-red-dim text-white hover:text-white',
+    'bg-green disabled:bg-green/40 disabled:hover:bg-green/40 hover:bg-green-dim !text-white',
+  stop: 'bg-red disabled:hover:bg-red hover:bg-red-dim text-white !text-white',
 };
 
 const buttonSorts = {
@@ -37,6 +39,7 @@ export default function Button({
   className,
   sort = 'default',
   selected,
+  icon,
   ...rest
 }: ButtonProps) {
   const sizeClass = buttonSizes[size];
@@ -59,7 +62,7 @@ export default function Button({
       )}
       {...rest}
     >
-      {text}
+      {icon && <Image src={icon} width={24} height={24} alt="icon" />} {text}
     </button>
   );
 }

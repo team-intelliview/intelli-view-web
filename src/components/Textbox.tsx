@@ -1,5 +1,5 @@
 import { cn } from '@/utils/string';
-import { TextareaHTMLAttributes, useState } from 'react';
+import { Children, TextareaHTMLAttributes, useState } from 'react';
 import Image from 'next/image';
 
 interface TextboxProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -11,6 +11,7 @@ interface TextboxProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   placeholder?: string;
   className?: string;
   editButtonClick?: () => void;
+  children?: React.ReactNode;
 }
 
 export default function Textbox({
@@ -25,6 +26,7 @@ export default function Textbox({
   placeholder,
   className,
   editButtonClick,
+  children,
   ...rest
 }: TextboxProps) {
   const [text, setText] = useState(value || '');
@@ -70,13 +72,14 @@ export default function Textbox({
         value={text}
         onChange={(e) => handleTextboxChange(e)}
         className={cn(
-          'border-gray-40 !text-gray-80 text-headline1 caret-primary-100 h-fit w-full resize-none border-b pb-2 font-medium focus:outline-none',
+          'border-gray-40 !text-gray-80 text-headline1 caret-primary-100 h-fit w-full resize-none border-b font-medium focus:outline-none',
           inputClassName,
         )}
         placeholder={placeholder}
         {...rest}
       />
       <p className="text-red text-body1">{errorMessage}</p>
+      {children}
     </div>
   );
 }

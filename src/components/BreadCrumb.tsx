@@ -14,7 +14,7 @@ const Process = {
   ],
   [REQUEST_OPTION.COVER_LETTER]: [
     '서류 작성',
-    '자기소개서 준비',
+    '자기소개서 작성',
     '리포트 확인',
   ],
 };

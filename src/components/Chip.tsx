@@ -26,7 +26,7 @@ export default function Chip({
           width={20}
           height={20}
         />
-        <p>{text}</p>
+        <p>완료 {text}</p>
       </>
     ),
     inProgress: (
@@ -37,11 +37,11 @@ export default function Chip({
           width={20}
           height={20}
         />
-        <p className="text-gray-70">{text}</p>
+        <p className="text-gray-70">진행 중</p>
         <p className="text-gray-90 font-semibold">{time}</p>
       </>
     ),
-    before: <p>{text}</p>,
+    before: <p>진행 전 {text}</p>,
   };
 
   return (
