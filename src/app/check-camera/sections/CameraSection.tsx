@@ -3,13 +3,11 @@
 import { MODAL, PATH } from '@/constants';
 import { useModal } from '@/hooks';
 import MovingButton from '@/widgets/MovingButton';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Webcam from 'react-webcam';
 
 export default function CameraSection() {
-  const router = useRouter();
   const { openModal } = useModal();
 
   const [isUsingCamera, setIsUsingCamera] = useState(false);

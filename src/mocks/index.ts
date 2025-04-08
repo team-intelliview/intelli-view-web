@@ -1,4 +1,7 @@
+import { questionItem } from '@/types';
 import contentCardList from './content.json';
-import questionList from './question.json';
+import questionListJson from './question.json';
+
+const questionList = questionListJson as questionItem[];
 
 export { contentCardList, questionList };

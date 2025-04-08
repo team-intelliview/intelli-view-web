@@ -11,7 +11,7 @@ export default function QuestionSection() {
   const router = useRouter();
 
   const handleBackClick = () => {
-    router.push(PATH.JOB_DESCRIPTION);
+    router.push(PATH.COVER_LETTER);
   };
   const handleNextClick = () => {
     router.push(PATH.CHECK_VOICE);
@@ -21,9 +21,16 @@ export default function QuestionSection() {
     <div className="flex h-full flex-col justify-between">
       <div className="flex flex-col gap-[16px]">
         {questionList.map(({ id, question }, index) => {
-          const [writeQuestion,setWriteQuestion] = useState(question);
+          const [writeQuestion, setWriteQuestion] = useState(question);
 
-          return <Textbox label={`질문 ${index + 1}`} value={writeQuestion} key={id} onChange={(e)=>setWriteQuestion(e.target.value)}/>
+          return (
+            <Textbox
+              label={`질문 ${index + 1}`}
+              value={writeQuestion}
+              key={id}
+              onChange={(e) => setWriteQuestion(e.target.value)}
+            />
+          );
         })}
       </div>
       <MovingButton
