@@ -66,24 +66,12 @@ export default function VoiceSection() {
             />
           )}
         </div>
-        {/* <button
-          onClick={handleMuteToggle}
-          className="shadow3 border-light flex items-center gap-[10px] rounded-[30px] border bg-white px-[20px] py-[12px] font-medium text-[#3E5463]"
-        >
-          <Image
-            src={!onRec ? '/icons/microphone_off.svg' : '/icons/waveform.svg'}
-            alt="microphone"
-            width={30}
-            height={30}
-          />
-          {!onRec ? '음소거 해제' : '음소거'}
-        </button> */}
       </div>
       <MovingButton
         className="flex justify-end pt-[20px] pb-[48px]"
         back={handleBackClick}
         isAbleBack={true}
-        isAbleNext={true}
+        isAbleNext={isChecked}
         next={handleNextClick}
       />
     </div>
