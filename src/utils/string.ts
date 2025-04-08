@@ -24,6 +24,16 @@ export function toKoreanRequestType({
         return '대면 면접';
       } else return '면접';
     case REQUEST_OPTION.COVER_LETTER:
-      return '자기소개서';
+      return 'AI 자기소개서 첨삭';
   }
 }
+
+export const formatDuration = (duration: number) => {
+  const minutes = Math.floor(duration / 60)
+    .toString()
+    .padStart(2, '0');
+  const seconds = Math.floor(duration % 60)
+    .toString()
+    .padStart(2, '0');
+  return `${minutes}:${seconds}`;
+};

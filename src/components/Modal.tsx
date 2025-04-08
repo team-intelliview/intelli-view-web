@@ -9,12 +9,14 @@ interface ModalProps {
   modalKey: ModalItem;
   children: React.ReactNode;
   className?: string;
+  isBackgroundDark?: boolean;
 }
 
 export default function Modal({
   modalKey,
   children,
   className,
+  isBackgroundDark = false,
   ...rest
 }: ModalProps) {
   const { closeModal } = useModal();
@@ -33,7 +35,10 @@ export default function Modal({
   return (
     <div
       id={modalKey}
-      className={cn('fixed inset-0 z-30 flex items-center justify-center')}
+      className={cn(
+        'fixed inset-0 z-30 flex items-center justify-center',
+        isBackgroundDark ? 'bg-black/60' : 'bg-transparent',
+      )}
     >
       <div
         className={cn(

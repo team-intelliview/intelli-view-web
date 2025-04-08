@@ -13,3 +13,18 @@ export interface WriteItem {
 export interface InterviewInfoType extends WriteItem {
   form: RequestOption;
 }
+
+export type logListItem = {
+  time: string;
+  image: string;
+};
+
+export type coverLetterItem = {
+  question: string;
+  answer: string;
+};
+
+export type questionItem = {
+  id: number;
+  question: string;
+};

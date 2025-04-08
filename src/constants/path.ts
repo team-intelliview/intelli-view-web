@@ -9,5 +9,5 @@ export const PATH = {
   INTERVIEW: '/interview',
   CHECK_VOICE: '/check-voice',
   CHECK_CAMERA: '/check-camera',
-  REPORT:'/report'
+  REPORT: '/report',
 };

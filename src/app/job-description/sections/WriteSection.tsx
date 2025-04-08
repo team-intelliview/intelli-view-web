@@ -19,7 +19,7 @@ export default function WriteSection() {
   };
 
   return (
-    <div className="flex h-full w-[50%]] flex-col justify-between">
+    <div className="flex h-full flex-col justify-between">
       <Textfield
         className="h-full pt-[36px] pb-[10px]"
         textareaClassName="h-[90%]"
