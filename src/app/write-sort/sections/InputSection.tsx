@@ -46,7 +46,9 @@ export default function InputSection() {
         back={handleBackClick}
         isAbleBack={true}
         isAbleNext={
+          compony &&
           compony.length < DOCS_MAX_LENGTH.COMPONY &&
+          job &&
           job.length < DOCS_MAX_LENGTH.JOB
         }
         next={handleNextClick}

@@ -47,7 +47,7 @@ export default function Chip({
   return (
     <div
       className={cn(
-        'text-body1 flex w-fit items-center justify-center rounded-[30px] pr-[16px] pl-[12px]',
+        'text-body1 flex w-fit py-[4px] items-center justify-center rounded-[30px] pr-[16px] pl-[12px]',
         state === 'complete' &&
           '!bg-gray-10 text-gray-70 gap-[4px] border border-[#EDEBEB]',
         state === 'inProgress' &&

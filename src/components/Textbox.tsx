@@ -1,5 +1,5 @@
 import { cn } from '@/utils/string';
-import { Children, TextareaHTMLAttributes, useState } from 'react';
+import { TextareaHTMLAttributes } from 'react';
 import Image from 'next/image';
 
 interface TextboxProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -29,7 +29,6 @@ export default function Textbox({
   children,
   ...rest
 }: TextboxProps) {
-
   return (
     <div
       className={cn(
