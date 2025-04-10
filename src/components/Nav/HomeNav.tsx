@@ -5,12 +5,29 @@ import Navigation from './Navigation';
 import { PATH } from '@/constants';
 import Link from 'next/link';
 import BreadCrumb from '../BreadCrumb';
+import { getUser } from '@/api/auth';
+import { useEffect } from 'react';
+import { useSetAtom } from 'jotai';
+import { userAtom } from '@/atoms/user';
+import { useUserState } from '@/hooks/useUser';
 
 interface HomeNavProps {
   breadCrumb?: boolean;
 }
 
 export default function HomeNav({ breadCrumb = false }: HomeNavProps) {
+  const setUser = useSetAtom(userAtom);
+  const user = useUserState();
+
+  useEffect(() => {
+    (async () => {
+      const data = await getUser();
+      setUser(data);
+    })();
+  }, []);
+
+  if (!user) return null;
+
   return (
     <Navigation className="absolute flex w-full items-center justify-between px-[60px]">
       <Link href={PATH.HOME}>
@@ -29,10 +46,10 @@ export default function HomeNav({ breadCrumb = false }: HomeNavProps) {
           width={36}
           height={36}
           className="rounded-[11.37px] object-cover"
-          src="/example.webp"
+          src={user.profile || '/example.webp'}
           alt="프로필 이미지"
         />
-        <p className="text-heading1 font-semibold">김지은</p>
+        <p className="text-heading1 font-semibold">{user.name || '이름'}</p>
       </div>
     </Navigation>
   );
