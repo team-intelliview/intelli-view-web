@@ -17,6 +17,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
+      <head>
+        <meta
+          httpEquiv="Content-Security-Policy"
+          content="upgrade-insecure-requests"
+        />
+      </head>
       <body className="scrollbar-hide flex flex-col">{children}</body>
     </html>
   );
