@@ -4,9 +4,8 @@ import Button from '@/components/Button';
 import { PATH } from '@/constants';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import WriteSection from './WriteSection';
-import FileSection from './FileSection';
 import MovingButton from '@/widgets/MovingButton';
+import { FileInput, ResumeForm } from '../components';
 
 export default function RenderingSection() {
   const router = useRouter();
@@ -20,8 +19,8 @@ export default function RenderingSection() {
   };
 
   const renderWriteSection = {
-    write: <WriteSection />,
-    file: <FileSection />,
+    write: <ResumeForm />,
+    file: <FileInput />,
   };
 
   return (

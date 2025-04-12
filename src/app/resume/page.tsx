@@ -1,6 +1,6 @@
 import Content from '@/components/Content';
 import PageLayout from '../PageLayout';
-import RenderingSection from './sections/RenderingSection';
+import { RenderingSection } from './sections';
 
 export default function Resume() {
   return (

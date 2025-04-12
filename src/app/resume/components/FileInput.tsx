@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 
-export default function FileSection() {
+export default function FileInput() {
   const fileRef = useRef<HTMLInputElement>(null);
 
   const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
