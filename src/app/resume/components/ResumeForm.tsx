@@ -4,7 +4,7 @@ import Textfield from '@/components/Textfield';
 import { DOCS_MAX_LENGTH } from '@/constants';
 import { useState } from 'react';
 
-export default function WriteSection() {
+export default function ResumeForm() {
   const [education, setEducation] = useState('');
   const [primer, setPrimer] = useState('');
   const [history, setHistory] = useState('');
