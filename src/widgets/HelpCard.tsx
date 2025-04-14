@@ -9,7 +9,7 @@ export default function HelpCard({ title, describe }: Props) {
   return (
     <Card className="shadow2 text-body2 absolute z-50 w-[360px]">
       <span className="text-gray-90 font-semibold">{title}</span>
-      <span className="font-regular whitespace-pre-wrap">{describe}</span>
+      <span className="font-regular text-gray-80 whitespace-pre-wrap">{describe}</span>
     </Card>
   );
 }
