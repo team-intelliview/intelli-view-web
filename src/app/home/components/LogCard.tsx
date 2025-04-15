@@ -9,6 +9,7 @@ import { contentCardList } from '@/mocks';
 import type { RequestOption } from '@/types';
 import { cn, toKoreanRequestType } from '@/utils';
 import Image from 'next/image';
+import { useRef } from 'react';
 
 interface Props {
   type: RequestOption;
@@ -17,6 +18,7 @@ interface Props {
 export default function LogCard({ type }: Props) {
   const { changeType } = useContent();
   const { openModal } = useModal();
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const titleIcon =
     type === REQUEST_OPTION.INTERVIEW
@@ -29,7 +31,11 @@ export default function LogCard({ type }: Props) {
   };
 
   return (
-    <Card className="flex w-[571px] flex-col bg-white px-[24px] pb-[32px]">
+    <Card
+      className={cn(
+        'relative flex w-[571px] flex-col bg-white px-[24px] pb-[32px]',
+      )}
+    >
       <div className="flex justify-between pb-[28px]">
         <p className="text-heading1 text-gray-80 flex items-center gap-[4px] font-semibold">
           <Image width={24} height={24} src={titleIcon} alt="title" />
@@ -42,7 +48,10 @@ export default function LogCard({ type }: Props) {
           onClick={handleProcessClick}
         />
       </div>
-      <div className="scrollbar-hide flex h-full w-full flex-col gap-[20px] overflow-y-scroll">
+      <div
+        ref={scrollRef}
+        className="scrollbar-hide flex h-full w-full flex-col gap-[20px] overflow-y-scroll"
+      >
         {contentCardList.length ? (
           contentCardList.map(
             ({
@@ -69,6 +78,11 @@ export default function LogCard({ type }: Props) {
           <EmptyContent type={type} />
         )}
       </div>
+      <div
+        className={cn(
+          'pointer-events-none absolute bottom-0 left-0 h-[120px] w-full bg-gradient-to-t from-white to-transparent',
+        )}
+      />
     </Card>
   );
 }
