@@ -21,9 +21,8 @@ export default function Dropdown({
         'border-gray-20 items-start rounded-[16px] border bg-white p-[32px] break-keep hover:cursor-pointer',
         className,
       )}
-      onClick={() => setIsOpen(!isOpen)}
     >
-      <div className="flex justify-between">
+      <div className="flex justify-between" onClick={() => setIsOpen(!isOpen)}>
         <p className="text-body1 text-gray-90 font-semibold">{title}</p>
         <Image
           width={24}
