@@ -19,7 +19,7 @@ export default function AnswerCompleteness() {
       }
       describe={`논리성, 명확성, 연관성을 기준으로 측정해요\n논리성: 주장에 대한 논리가 있는지\n명확성: 답변이 모호하지 않고 핵심이 분명한지\n연관성: 답변이 질문과 직접적으로 관련 있는지`}
       content={
-        <div className="flex gap-[24px] px-[24px] py-[32px]">
+        <div className="flex justify-center gap-[24px] px-[24px] py-[32px]">
           <RadicalProcess
             percentage={80}
             title="논리성"
