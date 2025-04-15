@@ -1,7 +1,7 @@
 import { atom } from 'jotai';
 import type { InterviewOption, RequestOption } from '@/types';
 import { REQUEST_OPTION } from '@/constants';
-import { atomWithStorage } from 'jotai/utils';
+import { atomWithStorage, createJSONStorage } from 'jotai/utils';
 
 type ContentInfo = {
   type: RequestOption;
@@ -10,13 +10,16 @@ type ContentInfo = {
   interviewType?: InterviewOption;
 };
 
-export const contentAtom = atomWithStorage<ContentInfo>('contentAtom', {
-  type: REQUEST_OPTION.INTERVIEW,
-  compony: '',
-  job: '',
-
-  interviewType: undefined,
-});
+export const contentAtom = atomWithStorage<ContentInfo>(
+  'contentAtom',
+  {
+    type: REQUEST_OPTION.INTERVIEW,
+    compony: '',
+    job: '',
+    interviewType: undefined,
+  },
+  createJSONStorage<ContentInfo>(() => sessionStorage),
+);
 
 export const updateContent = atom(
   null,

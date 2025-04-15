@@ -1,6 +1,6 @@
 import { ProviderOption } from '@/types';
 import { atom } from 'jotai';
-import { atomWithStorage } from 'jotai/utils';
+import { atomWithStorage, createJSONStorage } from 'jotai/utils';
 
 type UserInfo = {
   name: string;
@@ -9,11 +9,15 @@ type UserInfo = {
   provider?: ProviderOption;
 };
 
-export const userAtom = atomWithStorage<UserInfo>('userAtom', {
-  name: '',
-  email: '',
-  profile: '',
-});
+export const userAtom = atomWithStorage<UserInfo>(
+  'userAtom',
+  {
+    name: '',
+    email: '',
+    profile: '',
+  },
+  createJSONStorage<UserInfo>(() => sessionStorage),
+);
 
 export const updateUser = atom(
   null,

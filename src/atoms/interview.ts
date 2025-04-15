@@ -1,16 +1,20 @@
 import { atom } from 'jotai';
 import type { logListItem } from '@/types';
-import { atomWithStorage } from 'jotai/utils';
+import { atomWithStorage, createJSONStorage } from 'jotai/utils';
 
 type InterviewInfo = {
   logList: Array<logListItem>;
   nowInterviewing: number;
 };
 
-export const interviewAtom = atomWithStorage<InterviewInfo>('interviewAtom', {
-  logList: [],
-  nowInterviewing: 0,
-});
+export const interviewAtom = atomWithStorage<InterviewInfo>(
+  'interviewAtom',
+  {
+    logList: [],
+    nowInterviewing: 0,
+  },
+  createJSONStorage<InterviewInfo>(() => sessionStorage),
+);
 
 export const updateInterview = atom(
   null,
