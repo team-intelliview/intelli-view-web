@@ -4,7 +4,7 @@ import ProcessLog from '../components/ProcessLog';
 
 export default function SideSection() {
   return (
-    <div className="flex w-fit flex-col gap-[20px]">
+    <div className="flex w-[30%] flex-col gap-[20px]">
       <InterviewInfoSection />
       <ProcessLog entireCnt={questionList.length} />
     </div>
