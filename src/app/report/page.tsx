@@ -16,10 +16,10 @@ export default function Feedback() {
 
   return (
     <PageLayout
-      feedbackNav
+      reportNav
       className="bg-gray-0 flex max-w-screen gap-[20px] p-[70px]"
     >
-      <Content className="w-full flex-col gap-[20px] py-[24px]">
+      <Content className="w-full flex-col gap-[20px]">
         <SortToggleSection onChange={setSelected} selected={selected} />
         {selected === 'dashBoard' ? (
           <div className="flex gap-[20px]">

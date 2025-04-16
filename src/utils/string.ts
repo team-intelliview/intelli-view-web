@@ -22,7 +22,7 @@ export function toKoreanRequestType({
         return '비대면 면접';
       } else if (option === INTERVIEW_OPTION.ONLINE) {
         return '대면 면접';
-      } else return '면접';
+      } else return 'AI 면접 준비';
     case REQUEST_OPTION.COVER_LETTER:
       return 'AI 자기소개서 첨삭';
   }

@@ -55,7 +55,6 @@ export default function VoiceSection() {
               mainBarColor="#3D8DF5"
               speed={1}
               animateCurrentPick={false}
-              // onlyRecording={true}
             />
           ) : (
             <Image

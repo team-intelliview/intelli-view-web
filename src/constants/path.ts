@@ -10,4 +10,5 @@ export const PATH = {
   CHECK_VOICE: '/check-voice',
   CHECK_CAMERA: '/check-camera',
   REPORT: '/report',
+  MODIFY_RESUME: '/modify-resume',
 };
