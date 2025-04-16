@@ -14,13 +14,13 @@ export default function InterviewAttitude() {
           ✨ 자신감 있어 보여요
         </p>
       }
-      describe={`논리성, 명확성, 연관성을 기준으로 측정해요\n논리성: 주장에 대한 논리가 있는지\n명확성: 답변이 모호하지 않고 핵심이 분명한지\n연관성: 답변이 질문과 직접적으로 관련 있는지`}
+      describe={`대면 면접: AI가 사용자의 몸짓, 자세를 바탕으로 분석해요\n비대면 면접: AI가 사용자의 대면 시선, 눈 깜박임 등을 바탕으로 분석해요`}
       content={
         <div className="grid grid-cols-2 gap-[12px]">
           <AttitudeCard title="손" content="자연스러운 고개 움직임" />
-          <AttitudeCard title="손" content="자연스러운 고개 움직임" />
-          <AttitudeCard title="손" content="자연스러운 고개 움직임" />
-          <AttitudeCard title="손" content="자연스러운 고개 움직임" />
+          <AttitudeCard title="머리" content="자연스러운 고개 움직임" />
+          <AttitudeCard title="팔" content="자연스러운 고개 움직임" />
+          <AttitudeCard title="자세" content="자연스러운 고개 움직임" />
         </div>
       }
     />
