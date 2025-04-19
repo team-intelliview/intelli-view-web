@@ -1,12 +1,13 @@
 'use client';
 
-import { PATH } from '@/constants';
+import { PATH, REQUEST_OPTION } from '@/constants';
 import type { coverLetterItem } from '@/types';
 import Button from '@/components/Button';
 import MovingButton from '@/widgets/MovingButton';
 import { useRouter } from 'next/navigation';
 import QuestionInput from '../components/QuestionInput';
 import { useLayoutEffect, useState } from 'react';
+import { useContentState } from '@/hooks';
 
 const defaultValue: coverLetterItem = {
   question: '',
@@ -15,6 +16,8 @@ const defaultValue: coverLetterItem = {
 
 export default function AnswerSection() {
   const router = useRouter();
+
+  const { type } = useContentState();
 
   const [questionList, setQuestionList] = useState<Array<coverLetterItem>>([
     defaultValue,
@@ -27,7 +30,9 @@ export default function AnswerSection() {
     router.push(PATH.JOB_DESCRIPTION);
   };
   const handleNextClick = () => {
-    router.push(PATH.QUESTIONS);
+    type === REQUEST_OPTION.COVER_LETTER
+      ? router.push(PATH.REPORT)
+      : router.push(PATH.QUESTIONS);
   };
 
   useLayoutEffect(() => {

@@ -3,12 +3,13 @@
 import Button from '@/components/Button';
 import Card from '@/components/Card';
 import ProcessCard from '@/components/ProcessCard';
-import { MODAL, REQUEST_OPTION } from '@/constants';
+import { MODAL, PATH, REQUEST_OPTION } from '@/constants';
 import { useContent, useModal } from '@/hooks';
 import { contentCardList } from '@/mocks';
 import type { RequestOption } from '@/types';
 import { cn, toKoreanRequestType } from '@/utils';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useRef } from 'react';
 
 interface Props {
@@ -16,6 +17,7 @@ interface Props {
 }
 
 export default function LogCard({ type }: Props) {
+  const router = useRouter();
   const { changeType } = useContent();
   const { openModal } = useModal();
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -27,7 +29,10 @@ export default function LogCard({ type }: Props) {
 
   const handleProcessClick = () => {
     changeType(type);
-    openModal(MODAL.INTERVIEW_PROGRESS);
+    
+    type === REQUEST_OPTION.INTERVIEW
+      ? openModal(MODAL.INTERVIEW_PROGRESS)
+      : router.push(PATH.WRITE_SORT);
   };
 
   return (
@@ -80,7 +85,7 @@ export default function LogCard({ type }: Props) {
       </div>
       <div
         className={cn(
-          'pointer-events-none absolute bottom-0 left-0 h-[120px] w-full bg-gradient-to-t from-white to-transparent',
+          'pointer-events-none absolute bottom-0 left-0 h-[120px] w-full rounded-b-[20px] bg-gradient-to-t from-white to-transparent',
         )}
       />
     </Card>
