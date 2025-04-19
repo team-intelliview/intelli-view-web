@@ -41,7 +41,7 @@ export default function HomeNav({ breadCrumb = false }: HomeNavProps) {
         />
       </Link>
       {breadCrumb && <BreadCrumb />}
-      <div className="flex gap-[12px]">
+      <div className="flex items-center gap-[12px]">
         <Image
           width={36}
           height={36}
@@ -49,7 +49,7 @@ export default function HomeNav({ breadCrumb = false }: HomeNavProps) {
           src={user.profile || '/example.webp'}
           alt="프로필 이미지"
         />
-        <p className="text-heading1 font-semibold">{user.name || '이름'}</p>
+        <p className="text-heading2 font-medium">{user.name || '이름'}</p>
       </div>
     </Navigation>
   );

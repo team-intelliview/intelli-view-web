@@ -22,7 +22,6 @@ export default function Interview() {
     <>
       <PageLayout
         interviewNav
-        // time="23:22"
         className="flex h-fit w-screen justify-center overflow-hidden px-[10%]"
       >
         <Content className="my-[92px] h-fit w-full justify-center gap-[20px]">

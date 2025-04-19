@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Dropdown from '@/components/Dropdown';
+import { cn } from '@/utils';
 
 interface DropdownReportProps {
   title: string;
@@ -28,7 +29,7 @@ export default function DropdownReport({
         {detailSentences.map((sentence: string, index: number) => (
           <span
             key={index}
-            className="text-body1 text-gray-80 hover:text-primary-100 font-medium transition-colors duration-200"
+            className={cn("text-body1 text-gray-80 hover:text-primary-100 font-medium transition-colors duration-200",index===2&&'p-1 border border-red text-red rounded-sm bg-[#F6E9E8]',index===4&&'underline decoration-red text-red')}
           >
             {sentence}{' '}
           </span>
