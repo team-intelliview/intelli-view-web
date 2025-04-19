@@ -20,6 +20,7 @@ export default function ProgressModal() {
     <Modal
       modalKey={MODAL.INTERVIEW_PROGRESS}
       className="flex flex-col gap-[44px]"
+      isBackgroundDark
     >
       <div className="flex flex-col gap-[12px] text-center">
         <p className="text-title3 font-semibold">

@@ -20,3 +20,8 @@ export const DOCS_MAX_LENGTH = {
 export const COVER_LETTER_MAX_LENGTH = {
   ANSWER: 1500,
 } as const;
+
+export const REPORT_OPTION = {
+  DASH_BOARD: 'dashBoard',
+  DETAIL: 'detail',
+} as const;

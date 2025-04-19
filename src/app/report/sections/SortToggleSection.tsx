@@ -11,7 +11,7 @@ export default function SortToggleSection({ onChange, selected }: Props) {
   };
 
   return (
-    <div className="flex w-fit gap-[8px] py-[24px]">
+    <div className="flex w-fit gap-[8px] pt-[24px]">
       <Button
         sort="chip"
         text="대시보드"

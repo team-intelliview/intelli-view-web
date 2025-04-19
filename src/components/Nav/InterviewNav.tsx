@@ -23,7 +23,7 @@ export default function InterviewNav({ time }: Props) {
         <p className="text-heading2 text-gray-90 font-semibold">
           실전 모의 면접
         </p>
-        <Chip text="면접 진행" time={time} state="inProgress" />
+        <Chip state="inProgress" />
       </div>
       <Button
         text="면접 나가기"

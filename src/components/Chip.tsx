@@ -2,7 +2,7 @@ import { cn } from '@/utils/string';
 import Image from 'next/image';
 
 interface ChipProps {
-  text: string;
+  text?: string;
   size?: 'sm' | 'md';
   state?: 'complete' | 'inProgress' | 'before';
   time?: string;
@@ -37,7 +37,7 @@ export default function Chip({
           width={20}
           height={20}
         />
-        <p className="text-gray-70">진행 중</p>
+        <p className="text-gray-70">면접 진행 중</p>
         <p className="text-gray-90 font-semibold">{time}</p>
       </>
     ),
@@ -47,7 +47,7 @@ export default function Chip({
   return (
     <div
       className={cn(
-        'text-body1 flex w-fit py-[4px] items-center justify-center rounded-[30px] pr-[16px] pl-[12px]',
+        'text-body1 flex w-fit items-center justify-center rounded-[30px] py-[4px] pr-[16px] pl-[12px]',
         state === 'complete' &&
           '!bg-gray-10 text-gray-70 gap-[4px] border border-[#EDEBEB]',
         state === 'inProgress' &&

@@ -1,5 +1,6 @@
 'use client';
 
+import { PATH } from '@/constants';
 import Navigation from './Navigation';
 import { useContentState } from '@/hooks';
 import Image from 'next/image';
@@ -10,7 +11,7 @@ export default function ReportNav() {
   const { job, compony } = useContentState();
 
   const handleGoBackClick = () => {
-    router.back();
+    router.push(PATH.HOME);
   };
 
   return (
