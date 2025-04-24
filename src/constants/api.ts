@@ -7,6 +7,13 @@ export function createURL(url: string) {
 export const END_POINTS = {
   REISSUE: '/v1/reissue',
   USERS: '/v1/users/me',
+  JOBS: '/v1/jobs',
+  RESUMES: '/v1/resumes',
+  JD: (jobId: string) => `/v1/jobs/jd/${jobId}`,
+  COVER_LETTERS: '/v1/cover-letters',
+  FEEDBACK: '/v1/cover-letters/feedback',
+  RECENT: '/v1/cover-letters/recent',
+  FILE: '/v1/resumes/file',
 } as const;
 
 export const STATUS = {
