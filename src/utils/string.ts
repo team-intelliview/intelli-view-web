@@ -37,3 +37,18 @@ export const formatDuration = (duration: number) => {
     .padStart(2, '0');
   return `${minutes}:${seconds}`;
 };
+
+export function addSearchParams<T>(
+  endpoint: string,
+  params: Record<string, T>,
+): string {
+  const searchParams = new URLSearchParams();
+
+  for (const [key, value] of Object.entries(params)) {
+    if (value !== undefined) {
+      searchParams.append(key, String(value));
+    }
+  }
+
+  return `${endpoint}?${searchParams.toString()}`;
+}
