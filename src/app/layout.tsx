@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import './globals.css';
+import { Providers } from '@/utils';
 
 export const metadata: Metadata = {
   title: 'intelli-view',
@@ -19,11 +20,13 @@ export default function RootLayout({
     <html lang="ko">
       <head>
         <meta
-          httpEquiv="Content-Security-Policy"
+          httpEquiv="Content-Security-Policy" // http로 된 요청을 https로 바꿔서 요청
           content="upgrade-insecure-requests"
         />
       </head>
-      <body className="scrollbar-hide flex flex-col">{children}</body>
+      <body className="scrollbar-hide flex flex-col">
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

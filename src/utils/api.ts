@@ -53,32 +53,6 @@ export function getCookie(cookieName: string): string | null {
   );
 }
 
-export async function fetchWithToken<T>({
-  url,
-  options,
-}: fetchWithTokenProps): Promise<ServerResponse<T>> {
-  let response = await fetchRequest({ url, options });
-
-  if (response.status === 401) {
-    const reissueSuccess = await reissueToken();
-
-    if (reissueSuccess) {
-      fetchRequest({ url, options });
-    } else {
-      removeTokens();
-      window.location.href = PATH.LOGIN;
-      return null;
-    }
-  }
-
-  if (!response.ok) {
-    throw new Error(`API Error: ${response.status}`);
-  }
-
-  const data = await response.json();
-  return data as ServerResponse<T>;
-}
-
 async function reissueToken(): Promise<boolean> {
   try {
     const response = await fetch(createURL(END_POINTS.REISSUE), {
@@ -110,17 +84,17 @@ async function reissueToken(): Promise<boolean> {
   }
 }
 
-async function fetchRequest({ url, options }: fetchWithTokenProps) {
+export async function fetchRequest<T>({ url, options }: fetchWithTokenProps) {
   let token = getAccessToken();
 
   if (!token) {
     const reissued = await reissueToken();
     if (reissued) {
       token = getAccessToken();
-    }
+    } else throw new Error('액세스 토큰 발급 실패');
   }
 
-  return fetch(url, {
+  const response = await fetch(url, {
     ...options,
     headers: {
       ...(options?.headers || {}),
@@ -128,4 +102,7 @@ async function fetchRequest({ url, options }: fetchWithTokenProps) {
       Authorization: `Bearer ${token}`,
     },
   });
+
+  const data = await response.json();
+  return data as ServerResponse<T>;
 }
