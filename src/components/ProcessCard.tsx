@@ -1,14 +1,12 @@
+'use client';
+
+import { PROGRESSING_STATUS } from '@/constants';
+import { CoverLetterList } from '@/types';
 import { cn } from '@/utils/string';
 import dayjs from 'dayjs';
 import Image from 'next/image';
 
-interface ProcessCardProps {
-  inProgress: boolean;
-  title: string;
-  progress?: number;
-  question?: string;
-  response?: string;
-  submit?: string;
+interface ProcessCardProps extends CoverLetterList {
   labelClassName?: string;
   image?: string;
   clickMore?: () => void;
@@ -16,23 +14,26 @@ interface ProcessCardProps {
 }
 
 export default function ProcessCard({
-  inProgress,
+  id,
   title,
+  status,
   progress,
-  question,
-  response,
+  totalQuestion,
+  completeQuestion,
+  updatedAt,
   labelClassName,
   clickMore,
   image,
-  submit,
   className,
 }: ProcessCardProps) {
   return (
-    <div className="relative h-fit">
+    <div className="relative h-fit" id={`process-card-${id}`}>
       <div
         className={cn(
           'absolute top-0 left-0 h-full w-[6px] rounded-l-[12px]',
-          inProgress ? 'bg-primary-100' : 'bg-gray-60',
+          status === PROGRESSING_STATUS.IN_PROGRESS
+            ? 'bg-primary-100'
+            : 'bg-gray-60',
         )}
       />
       <div
@@ -55,13 +56,13 @@ export default function ProcessCard({
             <div
               className={cn(
                 'text-body1 rounded-[30px] border px-[8px] py-[4px]',
-                inProgress
+                status === PROGRESSING_STATUS.IN_PROGRESS
                   ? 'text-blue bg-primary-40 border-gray-20'
                   : 'bg-gray-10 border-gray-30 text-gray-80',
                 labelClassName,
               )}
             >
-              {inProgress ? '진행 중' : '완료'}
+              {status === PROGRESSING_STATUS.IN_PROGRESS ? '진행 중' : '완료'}
             </div>
             <button
               className="border-gray-20 flex h-[28px] w-[28px] justify-center rounded-[4px] border bg-white hover:cursor-pointer"
@@ -72,24 +73,27 @@ export default function ProcessCard({
           </div>
           <p className="text-headline1 font-semibold text-gray-100">{title}</p>
           <div className="gird-col-3 grid gap-[4px]">
-            {inProgress ? (
+            {status === PROGRESSING_STATUS.IN_PROGRESS ? (
               <>
                 <p className="text-body1 font-regular text-gray-80">
                   진행률<span className="ml-[8px]">{progress}%</span>
                 </p>
                 <p className="text-body1 font-regular text-gray-80">
-                  질문<span className="ml-[8px]">{question}</span>
+                  질문
+                  <span className="ml-[8px]">
+                    {completeQuestion}/{totalQuestion}
+                  </span>
                 </p>
                 <p className="text-body1 font-regular text-gray-80">
                   응답일
                   <span className="ml-[8px]">
-                    {dayjs(response).format('YYYY.MM.DD')}
+                    {dayjs(updatedAt).format('YYYY.MM.DD')}
                   </span>
                 </p>
               </>
             ) : (
               <p className="text-body1 font-regular text-gray-80">
-                제출일<span className="ml-[8px]">{submit}</span>
+                제출일<span className="ml-[8px]">{updatedAt}</span>
               </p>
             )}
           </div>

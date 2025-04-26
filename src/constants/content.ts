@@ -25,3 +25,8 @@ export const REPORT_OPTION = {
   DASH_BOARD: 'dashBoard',
   DETAIL: 'detail',
 } as const;
+
+export const PROGRESSING_STATUS = {
+  IN_PROGRESS: '잔행 중',
+  COMPLETE: '완료',
+};

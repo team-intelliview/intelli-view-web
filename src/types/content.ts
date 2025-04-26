@@ -1,29 +1,23 @@
-import { INTERVIEW_OPTION, REQUEST_OPTION,REPORT_OPTION } from '@/constants';
+import { INTERVIEW_OPTION, REQUEST_OPTION, REPORT_OPTION } from '@/constants';
 
 export type RequestOption =
   (typeof REQUEST_OPTION)[keyof typeof REQUEST_OPTION];
 export type InterviewOption =
   (typeof INTERVIEW_OPTION)[keyof typeof INTERVIEW_OPTION];
-  export type ReportOption =
-  (typeof REPORT_OPTION)[keyof typeof REPORT_OPTION];
+export type ReportOption = (typeof REPORT_OPTION)[keyof typeof REPORT_OPTION];
 
-export interface WriteItem {
+export interface JobInfoItem {
   compony: string;
-  job: string;
+  position: string;
 }
 
-export interface InterviewInfoType extends WriteItem {
+export interface InterviewInfoType extends JobInfoItem {
   form: RequestOption;
 }
 
 export type logListItem = {
   time: string;
   image: string;
-};
-
-export type coverLetterItem = {
-  question: string;
-  answer: string;
 };
 
 export type questionItem = {

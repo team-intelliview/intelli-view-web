@@ -11,7 +11,8 @@ export const END_POINTS = {
   RESUMES: '/v1/resumes',
   JD: (jobId: string) => `/v1/jobs/jd/${jobId}`,
   COVER_LETTERS: '/v1/cover-letters',
-  FEEDBACK: '/v1/cover-letters/feedback',
+  COVER_LETTER_FEEDBACK: (coverLetterId: string) =>
+    `/v1/cover-letters/feedback/${coverLetterId}`,
   RECENT: '/v1/cover-letters/recent',
   FILE: '/v1/resumes/file',
 } as const;
@@ -20,4 +21,8 @@ export const STATUS = {
   OK: 'OK',
   SERVER_ERROR: 'INTERNAL_SERVER_ERROR',
   NOT_FOUND: 'NOT_FOUND',
+};
+
+export const QUERY_KEYS = {
+  COVER_LETTERS: 'coverLetters',
 };
