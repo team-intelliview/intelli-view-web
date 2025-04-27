@@ -25,4 +25,5 @@ export const STATUS = {
 
 export const QUERY_KEYS = {
   COVER_LETTERS: 'coverLetters',
+  RESUME: 'resume',
 };
