@@ -2,14 +2,14 @@
 
 import { ResumeForm } from '@/app/resume/components';
 import Button from '@/components/Button';
-import { PATH } from '@/constants';
-import { useRouter } from 'next/navigation';
+import { MODAL } from '@/constants';
+import { useModal } from '@/hooks';
 
 export default function ResumeFormSection() {
-  const router = useRouter();
+  const { openModal } = useModal();
 
   const handleConfirmClick = () => {
-    router.push(PATH.HOME);
+    openModal(MODAL.MODIFY_CONFIRM);
   };
 
   return (
