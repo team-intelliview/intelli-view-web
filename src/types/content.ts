@@ -7,7 +7,7 @@ export type InterviewOption =
 export type ReportOption = (typeof REPORT_OPTION)[keyof typeof REPORT_OPTION];
 
 export interface JobInfoItem {
-  compony: string;
+  company: string;
   position: string;
 }
 
