@@ -9,10 +9,12 @@ export const END_POINTS = {
   USERS: '/v1/users/me',
   JOBS: '/v1/jobs',
   RESUMES: '/v1/resumes',
-  JD: (jobId: string) => `/v1/jobs/jd/${jobId}`,
+  JD: (jobId: string) => `/v1/jobs/${jobId}/jd`,
   COVER_LETTERS: '/v1/cover-letters',
   COVER_LETTER_FEEDBACK: (coverLetterId: string) =>
     `/v1/cover-letters/feedback/${coverLetterId}`,
+  COVER_LETTER_STATUS: (coverLetterId: string) =>
+    `/v1/cover-letters/${coverLetterId}/status`,
   RECENT: '/v1/cover-letters/recent',
   FILE: '/v1/resumes/file',
 } as const;
