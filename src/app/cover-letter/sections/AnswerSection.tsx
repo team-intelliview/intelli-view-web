@@ -9,7 +9,7 @@ import { useLayoutEffect, useState } from 'react';
 import { useContentState } from '@/hooks';
 import type { CoverLetterItem } from '@/types/coverLetter';
 import { useCoverLetterMutation } from '../hooks/useCoverLetterMutation';
-import { toast } from 'react-toastify';
+import { useInterviewQuestionMutation } from '../hooks/useInterviewQuestionMutation';
 
 const defaultValue: CoverLetterItem = {
   question: '',
@@ -18,8 +18,10 @@ const defaultValue: CoverLetterItem = {
 
 export default function AnswerSection() {
   const router = useRouter();
-  const { coverLetterMutate, isPending } = useCoverLetterMutation();
-
+  const { coverLetterMutate, isPending: coverLetterIsPending } =
+    useCoverLetterMutation();
+  const { interviewQuestionMutate, isPending: interviewQuestionIsPending } =
+    useInterviewQuestionMutation();
   const { type } = useContentState();
 
   const [questionList, setQuestionList] = useState<Array<CoverLetterItem>>([
@@ -33,7 +35,8 @@ export default function AnswerSection() {
     router.push(PATH.JOB_DESCRIPTION);
   };
   const handleNextClick = () => {
-    coverLetterMutate(
+    coverLetterMutate({ contents: questionList });
+    interviewQuestionMutate(
       { contents: questionList },
       {
         onSuccess: () =>
@@ -90,7 +93,7 @@ export default function AnswerSection() {
         className="flex justify-end pt-[20px] pb-[48px]"
         back={handleBackClick}
         isAbleBack={true}
-        isAbleNext={!isPending}
+        isAbleNext={!coverLetterIsPending && !interviewQuestionIsPending}
         next={handleNextClick}
       />
     </div>

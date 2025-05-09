@@ -7,7 +7,7 @@ export const useCoverLetterMutation = () => {
     mutationFn: postCoverLetter,
     onSuccess: ({ status, message, data }) => {
       if (status === STATUS.OK) {
-        console.log(data);
+        sessionStorage.setItem('coverLetterId', data);
       } else {
         throw new Error(message);
       }
