@@ -6,19 +6,35 @@ import { useContent } from '@/hooks';
 import MovingButton from '@/widgets/MovingButton';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { useJobsMutation } from '../hooks/useJobsMutation';
 
 export default function InputSection() {
   const router = useRouter();
   const { changeJob, changeCompony } = useContent();
+  const { jobsMutate, isPending } = useJobsMutation();
 
-  const [compony, setCompony] = useState('');
-  const [job, setJob] = useState('');
+  const [company, setCompony] = useState('');
+  const [position, setPosition] = useState('');
 
-  const handleBackClick = () => {};
-  const handleNextClick = () => {
-    changeJob(job);
-    changeCompony(compony);
-    router.push(PATH.RESUME);
+  const handleBackClick = () => {
+    router.replace(PATH.HOME);
+  };
+  const handleNextClick = async () => {
+    changeJob(position);
+    changeCompony(company);
+    jobsMutate(
+      { company, position },
+      {
+        onSuccess: () => {
+          router.push(PATH.RESUME);
+        },
+      },
+    );
+  };
+  const isAbleNextPage = () => {
+    const isValidCompany = company && company.length < DOCS_MAX_LENGTH.COMPONY;
+    const isValidPosition = position && position.length < DOCS_MAX_LENGTH.JOB;
+    return isValidCompany && isValidPosition && !isPending;
   };
 
   return (
@@ -28,7 +44,7 @@ export default function InputSection() {
           label="회사 명"
           placeholder="지원하는 기업의 회사 명을 입력해주세요"
           maxLength={DOCS_MAX_LENGTH.COMPONY}
-          value={compony}
+          value={company}
           onChange={(e) => setCompony(e.target.value)}
           errorMessage="최대 입력 가능 수를 초과하였습니다."
         />
@@ -36,8 +52,8 @@ export default function InputSection() {
           label="직무 명"
           placeholder="지원하는 직무 명을 입력해주세요"
           maxLength={DOCS_MAX_LENGTH.JOB}
-          value={job}
-          onChange={(e) => setJob(e.target.value)}
+          value={position}
+          onChange={(e) => setPosition(e.target.value)}
           errorMessage="최대 입력 가능 수를 초과하였습니다."
         />
       </div>
@@ -45,12 +61,7 @@ export default function InputSection() {
         className="flex justify-end pt-[20px] pb-[48px]"
         back={handleBackClick}
         isAbleBack={true}
-        isAbleNext={
-          compony &&
-          compony.length < DOCS_MAX_LENGTH.COMPONY &&
-          job &&
-          job.length < DOCS_MAX_LENGTH.JOB
-        }
+        isAbleNext={isAbleNextPage()}
         next={handleNextClick}
       />
     </div>

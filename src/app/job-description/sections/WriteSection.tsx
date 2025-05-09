@@ -5,9 +5,11 @@ import { DOCS_MAX_LENGTH, PATH } from '@/constants';
 import MovingButton from '@/widgets/MovingButton';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { useJobDescriptionMutation } from '../hooks/useJobDescriptionMutation';
 
 export default function WriteSection() {
   const router = useRouter();
+  const { jobDescriptionMutate, isPending } = useJobDescriptionMutation();
 
   const [jd, setJd] = useState('');
 
@@ -15,7 +17,10 @@ export default function WriteSection() {
     router.push(PATH.RESUME);
   };
   const handleNextClick = () => {
-    router.push(PATH.COVER_LETTER);
+    jobDescriptionMutate(
+      { jd },
+      { onSuccess: () => router.push(PATH.COVER_LETTER) },
+    );
   };
 
   return (
@@ -33,7 +38,9 @@ export default function WriteSection() {
         className="flex justify-end pt-[20px] pb-[48px]"
         back={handleBackClick}
         isAbleBack={true}
-        isAbleNext={jd.length < DOCS_MAX_LENGTH.JD && jd.length > 0}
+        isAbleNext={
+          jd.length < DOCS_MAX_LENGTH.JD && jd.length > 0 && !isPending
+        }
         next={handleNextClick}
       />
     </div>

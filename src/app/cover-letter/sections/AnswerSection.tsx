@@ -1,25 +1,30 @@
 'use client';
 
 import { PATH, REQUEST_OPTION } from '@/constants';
-import type { coverLetterItem } from '@/types';
 import Button from '@/components/Button';
 import MovingButton from '@/widgets/MovingButton';
 import { useRouter } from 'next/navigation';
 import QuestionInput from '../components/QuestionInput';
 import { useLayoutEffect, useState } from 'react';
 import { useContentState } from '@/hooks';
+import type { CoverLetterItem } from '@/types/coverLetter';
+import { useCoverLetterMutation } from '../hooks/useCoverLetterMutation';
+import { useInterviewQuestionMutation } from '../hooks/useInterviewQuestionMutation';
 
-const defaultValue: coverLetterItem = {
+const defaultValue: CoverLetterItem = {
   question: '',
   answer: '',
 };
 
 export default function AnswerSection() {
   const router = useRouter();
-
+  const { coverLetterMutate, isPending: coverLetterIsPending } =
+    useCoverLetterMutation();
+  const { interviewQuestionMutate, isPending: interviewQuestionIsPending } =
+    useInterviewQuestionMutation();
   const { type } = useContentState();
 
-  const [questionList, setQuestionList] = useState<Array<coverLetterItem>>([
+  const [questionList, setQuestionList] = useState<Array<CoverLetterItem>>([
     defaultValue,
   ]);
 
@@ -30,9 +35,32 @@ export default function AnswerSection() {
     router.push(PATH.JOB_DESCRIPTION);
   };
   const handleNextClick = () => {
-    type === REQUEST_OPTION.COVER_LETTER
-      ? router.push(PATH.REPORT)
-      : router.push(PATH.QUESTIONS);
+    coverLetterMutate({ contents: questionList });
+    interviewQuestionMutate(
+      { contents: questionList },
+      {
+        onSuccess: () =>
+          type === REQUEST_OPTION.COVER_LETTER
+            ? router.push(PATH.REPORT)
+            : router.push(PATH.QUESTIONS),
+      },
+    );
+  };
+
+  const handleQuestionInputChange = ({
+    index,
+    field,
+    value,
+  }: {
+    index: number;
+    field: string;
+    value: string;
+  }) => {
+    setQuestionList((prev) => {
+      const newList = [...prev];
+      newList[index] = { ...newList[index], [field]: value };
+      return newList;
+    });
   };
 
   useLayoutEffect(() => {
@@ -42,12 +70,15 @@ export default function AnswerSection() {
 
   return (
     <div className="flex w-[50%] flex-col gap-[36px]">
-      {questionList.map(({ question, answer }: coverLetterItem, index) => (
+      {questionList.map(({ question, answer }: CoverLetterItem, index) => (
         <QuestionInput
           key={index}
           id={index + 1}
           question={question}
           answer={answer}
+          onChange={(field, value) =>
+            handleQuestionInputChange({ index, field, value })
+          }
         />
       ))}
       <Button
@@ -62,7 +93,7 @@ export default function AnswerSection() {
         className="flex justify-end pt-[20px] pb-[48px]"
         back={handleBackClick}
         isAbleBack={true}
-        isAbleNext={true}
+        isAbleNext={!coverLetterIsPending && !interviewQuestionIsPending}
         next={handleNextClick}
       />
     </div>
