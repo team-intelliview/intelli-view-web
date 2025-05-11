@@ -1,26 +1,35 @@
 'use client';
 
-import { getInterviewsQuestion, getInterviewsStatus } from '@/api/interview';
 import Textbox from '@/components/Textbox';
 import { PATH } from '@/constants';
-import { QUESTION_REQUEST_STATUS } from '@/constants/api';
-import type { QuestionItem } from '@/types/question';
 import MovingButton from '@/widgets/MovingButton';
 import { useRouter } from 'next/navigation';
-import { ChangeEvent, useEffect, useState } from 'react';
 import Loading from '../loading';
 import { useQuestionList } from '../hooks/useQuestionList';
+import { useQuestionMutation } from '../hooks/useQuestionMutation';
+import { toast } from 'react-toastify';
 
 export default function QuestionSection() {
   const router = useRouter();
   const { questionList, isPollingComplete, setQuestionList } =
     useQuestionList();
+  const { questionMutation } = useQuestionMutation();
 
   const handleBackClick = () => {
     router.push(PATH.COVER_LETTER);
   };
   const handleNextClick = () => {
-    router.push(PATH.CHECK_VOICE);
+    questionMutation(
+      { contents: questionList },
+      {
+        onSuccess: () => {
+          router.push(PATH.CHECK_VOICE);
+        },
+        onError: () => {
+          toast('문제가 발생했어요. 잠시 후 다시 시도해주세요.');
+        },
+      },
+    );
   };
   const handleQuestionChange = (
     e: React.ChangeEvent<HTMLTextAreaElement>,
