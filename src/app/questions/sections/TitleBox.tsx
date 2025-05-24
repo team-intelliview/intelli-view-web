@@ -2,9 +2,12 @@
 
 import Button from '@/components/Button';
 import Image from 'next/image';
+import { useRecreateQuestionMutation } from '../hooks/useRecreateQuestionMutation';
 
 export default function TitleBox() {
-  const handleRenewQuestionClick = () => {};
+  const { recreateQuestionMutation, isPending } = useRecreateQuestionMutation();
+
+  const handleRecrateQuestion = () => {};
 
   return (
     <div className="flex items-center gap-[20px] pt-[48px]">
@@ -15,14 +18,15 @@ export default function TitleBox() {
         alt="question"
         className="bg-gray-0 border-gray-20 size-[54px] rounded-[10.62px] border-[1.77px] p-[8px]"
       />
-      <div className="flex flex-col gap-[4px] w-full">
+      <div className="flex w-full flex-col gap-[4px]">
         <div className="flex justify-between">
           <h1 className="text-title3 font-semibold">면접 질문 리스트</h1>
           <Button
             text="질문 재생성"
             size="sm"
             variant="secondary"
-            onClick={handleRenewQuestionClick}
+            disabled={isPending}
+            onClick={handleRecrateQuestion}
           />
         </div>
         <p className="text-heading2 text-gray-80">

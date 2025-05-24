@@ -8,7 +8,7 @@ export const useQuestionMutation = () => {
     mutationFn: patchInterviewsQuestion,
     onSuccess: ({ status, message }) => {
       if (status === STATUS.OK) {
-        toast('질문이 수정됐어요.');
+        toast('질문이 저장됐어요.');
       } else {
         throw new Error(message);
       }

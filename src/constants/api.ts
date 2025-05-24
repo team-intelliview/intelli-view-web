@@ -25,6 +25,10 @@ export const END_POINTS = {
   CHECK_VOICE: (interviewId: string) => `/v1/interviews/${interviewId}/voice`,
   RECREATE_INTERVIEW_QUESTION: (interviewId: string) =>
     `/v1/interviews/${interviewId}/questions/recreate`,
+  INTERVIEW_FEEDBACK: (interviewId: string) =>
+    `/v1/interviews/${interviewId}/feedback`,
+  INTERVIEW_LIST: '/v1/interviews',
+  INTERVIEW_VIDEO: (interviewId: string) => `/v1/interviews/${interviewId}`,
 } as const;
 
 export const STATUS = {
