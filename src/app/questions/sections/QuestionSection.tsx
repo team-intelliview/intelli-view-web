@@ -2,33 +2,58 @@
 
 import Textbox from '@/components/Textbox';
 import { PATH } from '@/constants';
-import { questionList } from '@/mocks';
 import MovingButton from '@/widgets/MovingButton';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import Loading from '../loading';
+import { useQuestionList } from '../hooks/useQuestionList';
+import { useQuestionMutation } from '../hooks/useQuestionMutation';
+import { toast } from 'react-toastify';
 
 export default function QuestionSection() {
   const router = useRouter();
+  const { questionList, isPollingComplete, setQuestionList } =
+    useQuestionList();
+  const { questionMutation } = useQuestionMutation();
 
   const handleBackClick = () => {
     router.push(PATH.COVER_LETTER);
   };
   const handleNextClick = () => {
-    router.push(PATH.CHECK_VOICE);
+    questionMutation(
+      { contents: questionList },
+      {
+        onSuccess: () => {
+          router.push(PATH.CHECK_VOICE);
+        },
+        onError: () => {
+          toast('문제가 발생했어요. 잠시 후 다시 시도해주세요.');
+        },
+      },
+    );
   };
+  const handleQuestionChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement>,
+    index: number,
+  ) => {
+    const updatedQuestions = [...questionList];
+    updatedQuestions[index - 1].question = e.target.value;
+    setQuestionList(updatedQuestions);
+  };
+
+  if (!isPollingComplete) {
+    return <Loading />;
+  }
 
   return (
     <div className="flex h-full flex-col justify-between">
       <div className="flex flex-col gap-[16px]">
-        {questionList.map(({ id, question }, index) => {
-          const [writeQuestion, setWriteQuestion] = useState(question);
-
+        {questionList.map(({ index, question }) => {
           return (
             <Textbox
-              label={`질문 ${index + 1}`}
-              value={writeQuestion}
-              key={id}
-              onChange={(e) => setWriteQuestion(e.target.value)}
+              label={`질문 ${index}`}
+              value={question || ''}
+              key={index}
+              onChange={(e) => handleQuestionChange(e, index)}
             />
           );
         })}
