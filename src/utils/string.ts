@@ -40,7 +40,7 @@ export const formatDuration = (duration: number) => {
 
 export function addSearchParams<T>(
   endpoint: string,
-  params: Record<string, T>,
+  params: Record<string | number, T>,
 ): string {
   const searchParams = new URLSearchParams();
 

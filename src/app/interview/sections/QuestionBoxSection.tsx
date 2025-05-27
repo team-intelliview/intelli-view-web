@@ -2,14 +2,16 @@
 
 import { useInterviewState } from '@/hooks/useInterview';
 import Image from 'next/image';
-import { questionList } from '@/mocks';
+import { QuestionItem } from '@/types/question';
 
-export default function QuestionBoxSection() {
-  const { nowInterviewing } = useInterviewState();
-  const question =
-    questionList.length === nowInterviewing
-      ? questionList[questionList.length - 1]
-      : questionList[nowInterviewing];
+interface QuestionBoxSectionProps {
+  questionList: QuestionItem[];
+}
+
+export default function QuestionBoxSection({
+  questionList,
+}: QuestionBoxSectionProps) {
+  const { interviews } = useInterviewState();
 
   return (
     <div className="border-gray-20 flex h-fit gap-[20px] rounded-[12px] border bg-white px-[40px] py-[20px]">
@@ -22,10 +24,10 @@ export default function QuestionBoxSection() {
       />
       <div className="flex flex-col gap-[8px]">
         <p className="text-heading1 text-gray-70 font-medium">
-          질문 {question.id}
+          질문 {questionList[interviews.nowInterviewing]?.index}
         </p>
         <p className="text-gray-90 text-heading2 font-semibold">
-          {question.question}
+          {questionList[interviews.nowInterviewing]?.question}
         </p>
       </div>
     </div>

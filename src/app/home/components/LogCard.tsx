@@ -5,8 +5,7 @@ import Card from '@/components/Card';
 import ProcessCard from '@/components/ProcessCard';
 import { MODAL, PATH, REQUEST_OPTION } from '@/constants';
 import { useContent, useModal } from '@/hooks';
-import { contentCardList } from '@/mocks';
-import type { RequestOption } from '@/types';
+import type { CoverLetterList, RequestOption } from '@/types';
 import { cn, toKoreanRequestType } from '@/utils';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -14,9 +13,10 @@ import { useRef } from 'react';
 
 interface Props {
   type: RequestOption;
+  data?: Array<CoverLetterList>;
 }
 
-export default function LogCard({ type }: Props) {
+export default function LogCard({ type, data }: Props) {
   const router = useRouter();
   const { changeType } = useContent();
   const { openModal } = useModal();
@@ -29,7 +29,7 @@ export default function LogCard({ type }: Props) {
 
   const handleProcessClick = () => {
     changeType(type);
-    
+
     type === REQUEST_OPTION.INTERVIEW
       ? openModal(MODAL.INTERVIEW_PROGRESS)
       : router.push(PATH.WRITE_SORT);
@@ -57,25 +57,26 @@ export default function LogCard({ type }: Props) {
         ref={scrollRef}
         className="scrollbar-hide flex h-full w-full flex-col gap-[20px] overflow-y-scroll"
       >
-        {contentCardList.length ? (
-          contentCardList.map(
+        {data && data.length ? (
+          data.map(
             ({
               id,
-              inProgress,
-              image,
               title,
-              process,
-              answer,
-              responseDate,
+              status,
+              progress,
+              totalQuestion,
+              completeQuestion,
+              updatedAt,
             }) => (
               <ProcessCard
                 key={id}
-                inProgress={inProgress}
-                image={image}
+                id={id}
+                status={status}
                 title={title}
-                progress={process}
-                question={answer}
-                response={responseDate}
+                progress={progress}
+                totalQuestion={totalQuestion}
+                completeQuestion={completeQuestion}
+                updatedAt={updatedAt}
               />
             ),
           )

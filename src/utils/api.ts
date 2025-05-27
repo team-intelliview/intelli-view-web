@@ -7,6 +7,7 @@ import { ServerResponse } from '@/types';
 interface fetchWithTokenProps {
   url: string;
   options?: RequestInit;
+  contentType?: boolean;
 }
 
 export default function getApiUrl(endPoint: string) {
@@ -84,7 +85,11 @@ async function reissueToken(): Promise<boolean> {
   }
 }
 
-export async function fetchRequest<T>({ url, options }: fetchWithTokenProps) {
+export async function fetchRequest<T>({
+  url,
+  options,
+  contentType = true,
+}: fetchWithTokenProps) {
   let token = getAccessToken();
 
   if (!token) {
@@ -98,7 +103,7 @@ export async function fetchRequest<T>({ url, options }: fetchWithTokenProps) {
     ...options,
     headers: {
       ...(options?.headers || {}),
-      'Content-Type': 'application/json',
+      ...(contentType && { 'Content-Type': 'application/json' }),
       Authorization: `Bearer ${token}`,
     },
   });
