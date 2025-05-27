@@ -19,6 +19,11 @@ interface PatchInterviewsQuestionProps {
   contents: Array<QuestionItem>;
 }
 
+interface PostInterviewVideoProps {
+  index: number;
+  file: FormData;
+}
+
 export const getInterviewsQuestion = async () => {
   const interviewId = sessionStorage.getItem('interviewId');
   const { data } = await fetchRequest<GetInterviewQuestionResponse>({
@@ -33,7 +38,7 @@ export const postInterviewQuestion = async ({
 }: PostInterviewQuestionProps) => {
   const jobId = sessionStorage.getItem('jobId');
   const type = 'FACE_TO_FACE';
-  const url = createURL(END_POINTS.INTERVIEW);
+  const url = createURL(END_POINTS.INTERVIEW_QUESTION_LIST);
 
   const response = await fetchRequest<PostInterviewQuestionResponse>({
     url: addSearchParams(url, { jobId, type }),
@@ -65,3 +70,21 @@ export const patchInterviewsQuestion = async ({
 
   return response;
 };
+
+export const postInterviewVideo = async ({
+  index,
+  file,
+}: PostInterviewVideoProps) => {
+  const interviewId = sessionStorage.getItem('interviewId');
+  const url = createURL(END_POINTS.INTERVIEW_VIDEO(interviewId));
+
+  const response = await fetchRequest<never>({
+    url: addSearchParams(url, { index }),
+    options: { method: 'POST', body: file },
+    contentType: false,
+  });
+
+  return response;
+};
+
+export const postRecreateInterviewQuestion = async () => {};
