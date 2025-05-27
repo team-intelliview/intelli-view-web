@@ -1,23 +1,22 @@
 'use client';
 
+import { ExpressionCorrectionItem, FeedbackItem } from '@/types';
 import { cn } from '@/utils';
 import HelpCard from '@/widgets/HelpCard';
 import Image from 'next/image';
 import { useState } from 'react';
 
-type LabelStatus = '위험' | '경고';
+type LabelStatus = '개선 전' | '개선 후';
 
-interface AttitudeCardProps {
-  title: string;
-  content: string;
-  status: LabelStatus;
-}
-
-export default function Sidebar() {
+export default function Sidebar({
+  expressionCorrection,
+}: {
+  expressionCorrection: FeedbackItem['expressionCorrection'];
+}) {
   const [isDescribeModalOpen, setIsDescribeModalOpen] = useState(false);
 
   return (
-    <div className="border-gray-20 flex h-screen w-[30%] flex-col gap-[24px] rounded-[16px] border bg-white p-[24px]">
+    <div className="border-gray-20 flex w-[30%] flex-col gap-[24px] rounded-[16px] border bg-white p-[24px]">
       <div className="flex items-center gap-[4px]">
         <p className="text-heading2 text-gray-90 font-semibold">
           부적절 언어 감지
@@ -48,65 +47,52 @@ export default function Sidebar() {
           )}
         </div>
       </div>
-      <div className="flex flex-col gap-[12px]">
-        <AttitudeCard
-          title="부정적 성향"
-          content="제가 그건 못해서..."
-          status="위험"
-        />
-        <AttitudeCard
-          title="강한 단정적 표현"
-          content="그건 맞지 않아요"
-          status="위험"
-        />
-        <AttitudeCard
-          title="직장에 대한 부정적 이야기"
-          content="직장에 근무했을 때 전 직장 동료가 너무 무능했어요. 그래서 제가 잘 해도 큰 성과를 이루지 못했어요."
-          status="경고"
-        />
-        <AttitudeCard
-          title="무례하거나 무책임한 표정"
-          content="제 생각엔 별로 안 중요한 것 같은데요."
-          status="경고"
-        />
+      <div className="flex flex-col gap-[24px]">
+        {expressionCorrection ? (
+          expressionCorrection.map(({ original, suggestion }) => (
+            <AttitudeCard
+              key={original}
+              original={original}
+              suggestion={suggestion}
+            />
+          ))
+        ) : (
+          <p className="text-body3 text-gray-80">
+            감지된 부적절한 언어가 없어요.
+          </p>
+        )}
       </div>
     </div>
   );
 }
 
-function AttitudeCard({ title, content, status }: AttitudeCardProps) {
+function AttitudeCard({ original, suggestion }: ExpressionCorrectionItem) {
   return (
-    <div className="bg-gray-0 flex flex-col gap-[16px] rounded-[12px] p-[20px] font-medium">
-      <div className="flex justify-between">
-        <p className="text-gray-80 text-body2">{title}</p>
-        <AlertLabel status={status} />
+    <div className="border-gray-20 shadow-shadow3 flex w-full flex-col rounded-[12px] border font-medium">
+      <div className="flex flex-col gap-[8px] px-[12px] pt-[12px] pb-[16px]">
+        <AttitudeLabel status="개선 전" />
+        <p className="text-body3 text-gray-70 font-semibold">"{original}"</p>
       </div>
-      <p className="text-body1">"{content}"</p>
+      <div className="border-gray-20 border-b" />
+      <div className="flex flex-col gap-[8px] px-[12px] pt-[12px] pb-[16px]">
+        <AttitudeLabel status="개선 후" />
+        <p className="text-body3 font-semibold">"{suggestion}"</p>
+      </div>
     </div>
   );
 }
 
-function AlertLabel({ status }: { status: LabelStatus }) {
+function AttitudeLabel({ status }: { status: LabelStatus }) {
   return (
     <div
       className={cn(
-        'flex gap-[4px] rounded-[8px] p-[4px]',
-        status === '경고' ? 'bg-gray-20' : 'bg-red/10 text-red',
+        'flex w-fit rounded-[4px] border px-[6px] py-[2px]',
+        status === '개선 전'
+          ? 'bg-gray-10 border-gray-30 text-gray-80'
+          : 'bg-primary-40 border-primary-60 text-blue-dim',
       )}
     >
-      <Image
-        src={
-          status === '경고'
-            ? '/icons/alert_circle.svg'
-            : '/icons/alert_triangle.svg'
-        }
-        alt="상태"
-        height={18}
-        width={18}
-      />
-      <p className="font-regular text-label">
-        {status === '경고' ? '경고' : '위험'}
-      </p>
+      <p className="font-regular text-label">{status}</p>
     </div>
   );
 }
