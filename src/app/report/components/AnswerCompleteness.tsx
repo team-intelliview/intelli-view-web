@@ -1,3 +1,4 @@
+import { CompletionItem, DashboardItem } from '@/types';
 import { cn } from '@/utils';
 import FeedbackCard from '@/widgets/FeedbackCard';
 
@@ -7,13 +8,20 @@ interface RadicalProcessProps {
   color: string;
 }
 
-export default function AnswerCompleteness() {
+export default function AnswerCompleteness({
+  avg,
+  logical,
+  relevance,
+  clarity,
+}: CompletionItem) {
   return (
     <FeedbackCard
       title="종합 답변 완성도"
       subTitle={
         <p className="text-body1 font-medium text-[#C4C5C5]">
-          <span className="text-heading2 text-gray-80 font-semibold">70% </span>
+          <span className="text-heading2 text-gray-80 font-semibold">
+            {avg}%{' '}
+          </span>
           / 100
         </p>
       }
@@ -21,12 +29,20 @@ export default function AnswerCompleteness() {
       content={
         <div className="flex justify-center gap-[24px] px-[24px] py-[32px]">
           <RadicalProcess
-            percentage={80}
+            percentage={logical}
             title="논리성"
             color="text-primary-100"
           />
-          <RadicalProcess percentage={60} title="연관성" color="text-purple" />
-          <RadicalProcess percentage={80} title="명확성" color="text-green" />
+          <RadicalProcess
+            percentage={relevance}
+            title="연관성"
+            color="text-purple"
+          />
+          <RadicalProcess
+            percentage={clarity}
+            title="명확성"
+            color="text-green"
+          />
         </div>
       }
     />
@@ -37,12 +53,20 @@ function RadicalProcess({ percentage, title, color }: RadicalProcessProps) {
   return (
     <div className="flex flex-col gap-[12px] text-center">
       <div
-        className={cn('radial-progress bg-primary-40 size-[118px]', color)}
-        style={{ '--value': percentage } as React.CSSProperties}
-        aria-valuenow={percentage}
-        role="progressbar"
+        className={cn(
+          'radial-progress text-heading2 bg-primary-40 font-semibold',
+          color,
+        )}
+        style={
+          {
+            '--value': percentage,
+            '--size': '140px',
+          } as React.CSSProperties
+        }
       >
-        {percentage}%
+        <p className="text-heading2 font-semibold text-[#3E5463]">
+          {percentage}%
+        </p>
       </div>
       <p className="text-body1 text-gray-80">{title}</p>
     </div>
