@@ -1,10 +1,9 @@
 'use client';
 
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { useMediaRecorder } from './useMediaRecorder';
-import { useFFmpegConverter } from './useFFmpegConverter';
-import { getVideoDuration } from '../utils/videoUtils';
 import { InterviewInfo } from '@/atoms/interview';
+import { getVideoDuration } from '../utils/video';
 
 interface UseVideoRecordingParams {
   webcamRef: React.RefObject<any>;
@@ -23,27 +22,14 @@ export function useVideoRecording({
   changeNowInterviewing,
   setIsChecked,
 }: UseVideoRecordingParams) {
-  const onDataAvailable = useCallback(() => {}, []);
-
-  const { startRecording, stopRecording } = useMediaRecorder(onDataAvailable);
-  const { loadFFmpeg, convertWebmToMp4, isReady } = useFFmpegConverter();
-
-  useEffect(() => {
-    loadFFmpeg();
-  }, [loadFFmpeg]);
+  const { startRecording, stopRecording } = useMediaRecorder(() => {});
 
   const handleStartRecording = useCallback(async () => {
     const stream = await startRecording();
     return stream;
-  }, [startRecording, interviews.nowInterviewing]);
+  }, [startRecording]);
 
   const handleStopRecording = useCallback(async () => {
-    if (!isReady) {
-      console.warn('FFmpeg가 아직 준비되지 않았습니다.');
-      setIsChecked(false);
-      return;
-    }
-
     const webmBlob = await stopRecording();
 
     if (webmBlob.size === 0) {
@@ -51,59 +37,52 @@ export function useVideoRecording({
       return;
     }
 
-    try {
-      const mp4Blob = await convertWebmToMp4(webmBlob);
-      console.log(mp4Blob);
-      const formData = new FormData();
-      formData.append('file', mp4Blob, 'answer.mp4');
+    const formData = new FormData();
+    formData.append('file', webmBlob, 'answer.webm');
 
-      interviewVideoMutate(
-        { file: formData, index: interviews.nowInterviewing },
-        {
-          onSuccess: () => {
-            console.log('비디오 업로드 성공');
-            setIsChecked(true);
-          },
-          onError: (error: any) => {
-            console.error('비디오 업로드 실패:', error);
-            setIsChecked(false);
-          },
+    interviewVideoMutate(
+      { file: formData, index: interviews.nowInterviewing + 1 },
+      {
+        onSuccess: () => {
+          console.log('비디오 업로드 성공');
+          setIsChecked(true);
+          changeNowInterviewing(interviews.nowInterviewing + 1);
         },
-      );
+        onError: (error: any) => {
+          console.error('비디오 업로드 실패:', error);
+          setIsChecked(false);
+        },
+      },
+    );
 
-      const duration = await getVideoDuration(mp4Blob);
-      const screenshot = webcamRef.current?.getScreenshot();
-      if (screenshot) {
-        const byteString = atob(screenshot.split(',')[1]);
-        const mimeString = screenshot.split(',')[0].split(':')[1].split(';')[0];
+    const duration = await getVideoDuration(webmBlob);
+    const screenshot = webcamRef.current?.getScreenshot();
+    if (screenshot) {
+      const byteString = atob(screenshot.split(',')[1]);
+      const mimeString = screenshot.split(',')[0].split(':')[1].split(';')[0];
 
-        const ab = new ArrayBuffer(byteString.length);
-        const ia = new Uint8Array(ab);
-        for (let i = 0; i < byteString.length; i++) {
-          ia[i] = byteString.charCodeAt(i);
-        }
-
-        const blob = new Blob([ab], { type: mimeString });
-        const blobUrl = URL.createObjectURL(blob);
-
-        addInterview({
-          image: blobUrl,
-          time: duration,
-        });
+      const ab = new ArrayBuffer(byteString.length);
+      const ia = new Uint8Array(ab);
+      for (let i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
       }
-      changeNowInterviewing(interviews.nowInterviewing + 1);
-    } catch (error) {
-      console.error('MP4 변환 및 업로드 실패:', error);
-      setIsChecked(false);
+
+      const blob = new Blob([ab], { type: mimeString });
+      const blobUrl = URL.createObjectURL(blob);
+
+      addInterview({
+        image: blobUrl,
+        time: duration,
+      });
     }
   }, [
     stopRecording,
-    convertWebmToMp4,
     interviewVideoMutate,
     interviews.nowInterviewing,
     addInterview,
     setIsChecked,
     webcamRef,
+    changeNowInterviewing,
   ]);
 
   return {

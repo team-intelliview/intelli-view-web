@@ -61,7 +61,7 @@ export default function VideoSection() {
         onClick={handleRecording}
         text={isInterviewing ? '답변 종료' : '답변 시작'}
         variant={isInterviewing ? 'stop' : 'start'}
-        disabled={isPending && isChecked}
+        disabled={isPending && !isChecked}
       />
       <Button text="면접 초기화" onClick={handleInterviewReset} />
     </div>
