@@ -5,7 +5,7 @@ import { useUserState } from '@/hooks/useUser';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-export default function InfoSection() {
+const InfoSection = () => {
   const router = useRouter();
 
   const { name } = useUserState();
@@ -33,4 +33,6 @@ export default function InfoSection() {
       </button>
     </div>
   );
-}
+};
+
+export default InfoSection;

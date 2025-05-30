@@ -4,3 +4,6 @@ export * from './modal';
 export * from './server';
 export * from './coverLetter';
 export * from './resume';
+export * from './feedback';
+export * from './interview';
+export * from './home';

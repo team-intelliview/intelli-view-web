@@ -33,7 +33,7 @@ export const postInterviewQuestion = async ({
 }: PostInterviewQuestionProps) => {
   const jobId = sessionStorage.getItem('jobId');
   const type = 'FACE_TO_FACE';
-  const url = createURL(END_POINTS.INTERVIEW);
+  const url = createURL(END_POINTS.INTERVIEW_QUESTIONS;
 
   const response = await fetchRequest<PostInterviewQuestionResponse>({
     url: addSearchParams(url, { jobId, type }),
