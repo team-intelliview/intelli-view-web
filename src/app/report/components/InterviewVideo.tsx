@@ -25,7 +25,7 @@ export default function InterviewVideo({
     <>
       <video
         controls
-        src={videoData[currentIndex].url || '/interview.mp4'}
+        src={videoData[currentIndex].url}
         className="mx-auto flex w-full items-center rounded-[18px]"
       />
       <div className="flex w-full items-center justify-center gap-8">

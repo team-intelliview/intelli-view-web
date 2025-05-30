@@ -12,7 +12,7 @@ export const END_POINTS = {
   JD: (jobId: string) => `/v1/jobs/${jobId}/jd`,
   COVER_LETTERS: '/v1/cover-letters',
   COVER_LETTER_FEEDBACK: (coverLetterId: string) =>
-    `/v1/cover-letters/feedback/${coverLetterId}`,
+    `/v1/cover-letters/${coverLetterId}/feedback`,
   COVER_LETTER_STATUS: (coverLetterId: string) =>
     `/v1/cover-letters/${coverLetterId}/status`,
   RECENT: '/v1/cover-letters/recent',
@@ -40,8 +40,10 @@ export const STATUS = {
 
 export const QUERY_KEYS = {
   COVER_LETTERS: 'coverLetters',
-  INTERVIEW: 'interview',
+  INTERVIEWS: 'interviews',
+  INTERVIEW_QUESTION: 'interviewQuestion',
   RESUME: 'resume',
+  LOGIN: 'login',
 };
 
 export const QUESTION_REQUEST_STATUS = {
