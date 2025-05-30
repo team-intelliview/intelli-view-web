@@ -93,7 +93,10 @@ export default function ProcessCard({
               </>
             ) : (
               <p className="text-body1 font-regular text-gray-80">
-                제출일<span className="ml-[8px]">{updatedAt}</span>
+                제출일
+                <span className="ml-[8px]">
+                  {dayjs(updatedAt).format('YYYY.MM.DD')}
+                </span>
               </p>
             )}
           </div>

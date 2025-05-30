@@ -1,35 +1,22 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
-import { getCoverLetters, getInterviews } from '@/api/home';
-import LogCard from '../components/LogCard';
 import { REQUEST_OPTION } from '@/constants';
-import { QUERY_KEYS } from '@/constants/api';
+import { useCoverLetter, useInterview } from '../hooks/useLogList';
+import { LogContainer } from '../components';
 
-const useCoverLetter = async () => {
-  const { contents } = await getCoverLetters();
-  return contents;
-};
+const LogSection = () => {
+  const { data: coverLetterData } = useCoverLetter();
+  const { data: interviewData } = useInterview();
 
-const useInterview = async () => {
-  const { contents } = await getInterviews();
-  return contents;
-};
-
-export default function LogSection() {
-  const { data: coverLetterList } = useQuery({
-    queryKey: [QUERY_KEYS.COVER_LETTERS],
-    queryFn: useCoverLetter,
-  });
-  const { data: interviewList } = useQuery({
-    queryKey: [QUERY_KEYS.INTERVIEW],
-    queryFn: useInterview,
-  });
+  const coverLetterList = coverLetterData?.contents || [];
+  const interviewList = interviewData?.contents || [];
 
   return (
     <div className="flex h-[75%] gap-[24px]">
-      <LogCard type={REQUEST_OPTION.INTERVIEW} data={interviewList}/>
-      <LogCard type={REQUEST_OPTION.COVER_LETTER} data={coverLetterList} />
+      <LogContainer type={REQUEST_OPTION.INTERVIEW} log={interviewList} />
+      <LogContainer type={REQUEST_OPTION.COVER_LETTER} log={coverLetterList} />
     </div>
   );
-}
+};
+
+export default LogSection;
