@@ -1,26 +1,25 @@
 'use client';
 
 import Chip from '@/components/Chip';
-import { MODAL } from '@/constants';
-import { useModal } from '@/hooks';
 import { useInterviewState } from '@/hooks/useInterview';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
-interface Props {
+interface ProcessLogProps {
   entireCnt: number;
 }
 
-export default function ProcessLog({ entireCnt }: Props) {
+export default function ProcessLog({ entireCnt }: ProcessLogProps) {
+  const router = useRouter();
   const { interviews } = useInterviewState();
-  const { openModal } = useModal();
 
   useEffect(() => {
     if (
       interviews.logList.length > 0 &&
       interviews.logList.length === entireCnt
     ) {
-      openModal(MODAL.COMPLETE_INTERVIEW);
+      router.push('/interview/end-interview');
     }
   }, [interviews, entireCnt]);
 

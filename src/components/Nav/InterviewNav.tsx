@@ -3,18 +3,13 @@
 import Navigation from './Navigation';
 import Chip from '../Chip';
 import Button from '@/components/Button';
-import { useModal } from '@/hooks';
-import { MODAL } from '@/constants';
+import { useRouter } from 'next/navigation';
 
-interface Props {
-  time: string;
-}
-
-export default function InterviewNav({ time }: Props) {
-  const { openModal } = useModal();
+export default function InterviewNav() {
+  const router = useRouter();
 
   const handleQuitInterview = () => {
-    openModal(MODAL.QUIT_INTERVIEW);
+    router.push('/interview/quit-interview');
   };
 
   return (

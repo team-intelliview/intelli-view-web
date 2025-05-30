@@ -12,3 +12,4 @@ export * from './Card';
 export * from './Textbox';
 export * from './BreadCrumb';
 export * from './Dropdown';
+export * from './Modal';
