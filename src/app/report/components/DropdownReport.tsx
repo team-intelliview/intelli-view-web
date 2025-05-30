@@ -3,39 +3,37 @@
 import Image from 'next/image';
 import Dropdown from '@/components/Dropdown';
 import { cn } from '@/utils';
+import { DetailItem } from '@/types';
 
-interface DropdownReportProps {
-  title: string;
-  detail: string;
-  positive: string;
-  negative: string;
+interface DropdownReportProps extends DetailItem {
   className?: string;
   open?: boolean;
 }
 
 export default function DropdownReport({
-  title,
-  detail,
+  index,
+  question,
+  answer,
   positive,
   negative,
-  className,
-  open = false,
 }: DropdownReportProps) {
-  const detailSentences = detail.match(/[^.?!]+[.?!]/g) || []; // 문장을 . ? ! 단위로 끊기
+  const detailSentences =
+    typeof answer === 'string' ? answer.match(/[^.?!]+[.?!]/g) || [answer] : [];
 
   return (
-    <Dropdown title={title}>
-      <p>
-        {detailSentences.map((sentence: string, index: number) => (
-          <span
-            key={index}
-            className={cn("text-body1 text-gray-80 hover:text-primary-100 font-medium transition-colors duration-200",index===2&&'p-1 border border-red text-red rounded-sm bg-[#F6E9E8]',index===4&&'underline decoration-red text-red')}
-          >
-            {sentence}{' '}
-          </span>
-        ))}
-      </p>
-      <div className="bg-gray-0 flex flex-col gap-[16px] rounded-[14px] p-[20px]">
+    <Dropdown question={`${index}. ${question}`} open>
+      {detailSentences.map((sentence: string, index: number) => (
+        <span
+          key={index}
+          className={cn(
+            'text-body1 text-gray-80 font-medium transition-colors duration-200 hover:font-bold',
+            index === 4 && 'decoration-red text-red hover:text-none underline',
+          )}
+        >
+          {sentence}{' '}
+        </span>
+      ))}
+      <div className="bg-gray-0 mt-[32px] flex flex-col gap-[16px] rounded-[14px] p-[20px]">
         <div className="flex gap-[8px]">
           <Image
             src="/icons/sparkles.svg"

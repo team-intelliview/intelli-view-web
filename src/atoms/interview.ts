@@ -15,13 +15,13 @@ export const interviewAtom = atomWithStorage<InterviewInfo>(
   'interviewAtom',
   {
     logList: [],
-    nowInterviewing: 0,
+    nowInterviewing: 1,
   },
   createJSONStorage<InterviewInfo>(() => sessionStorage),
 );
 
 export const deleteAllInterview = atom(null, (_get, set) => {
-  set(interviewAtom, { logList: [], nowInterviewing: 0 });
+  set(interviewAtom, { logList: [], nowInterviewing: 1 });
 });
 
 export const updateInterviewAtom = atom(

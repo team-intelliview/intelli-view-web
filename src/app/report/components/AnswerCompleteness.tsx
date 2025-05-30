@@ -60,13 +60,11 @@ function RadicalProcess({ percentage, title, color }: RadicalProcessProps) {
         style={
           {
             '--value': percentage,
-            '--size': '140px',
+            '--size': '120px',
           } as React.CSSProperties
         }
       >
-        <p className="text-heading2 font-semibold text-[#3E5463]">
-          {percentage}%
-        </p>
+        <p className="text-heading3 text-[#3E5463]">{percentage}%</p>
       </div>
       <p className="text-body1 text-gray-80">{title}</p>
     </div>
