@@ -1,16 +1,9 @@
-'use client';
-
 import Content from '@/components/Content';
 import PageLayout from '../PageLayout';
 import Image from 'next/image';
 import CameraSection from './sections/CameraSection';
-import FinishCheckModal from './components/FinishCheckModal';
-import { useModalState } from '@/hooks';
-import { MODAL } from '@/constants';
 
 export default function checkCamera() {
-  const { isOpen } = useModalState({ key: MODAL.FINISH_CHECK });
-
   return (
     <>
       <PageLayout homeNav breadCrumb className="flex max-w-screen">
@@ -33,7 +26,6 @@ export default function checkCamera() {
           <CameraSection />
         </Content>
       </PageLayout>
-      {isOpen && <FinishCheckModal />}
     </>
   );
 }

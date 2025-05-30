@@ -1,14 +1,12 @@
 'use client';
 
-import { MODAL, PATH } from '@/constants';
-import { useModal } from '@/hooks';
 import MovingButton from '@/widgets/MovingButton';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Webcam from 'react-webcam';
 
 export default function CameraSection() {
-  const { openModal } = useModal();
+  const router = useRouter();
 
   const [isUsingCamera, setIsUsingCamera] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
@@ -19,7 +17,7 @@ export default function CameraSection() {
 
   const handleBackClick = () => {};
   const handleNextClick = () => {
-    openModal(MODAL.FINISH_CHECK);
+    router.push('/check-camera/finish-check');
   };
 
   return (

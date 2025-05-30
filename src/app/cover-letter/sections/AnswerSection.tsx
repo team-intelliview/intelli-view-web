@@ -35,16 +35,17 @@ export default function AnswerSection() {
     router.push(PATH.JOB_DESCRIPTION);
   };
   const handleNextClick = () => {
-    coverLetterMutate({ contents: questionList });
-    interviewQuestionMutate(
-      { contents: questionList },
-      {
-        onSuccess: () =>
-          type === REQUEST_OPTION.COVER_LETTER
-            ? router.push(PATH.REPORT)
-            : router.push(PATH.QUESTIONS),
-      },
-    );
+    type === REQUEST_OPTION.INTERVIEW
+      ? interviewQuestionMutate(
+          { contents: questionList },
+          {
+            onSuccess: () => router.push(PATH.QUESTIONS),
+          },
+        )
+      : coverLetterMutate(
+          { contents: questionList },
+          { onSuccess: () => router.push(PATH.REPORT) },
+        );
   };
 
   const handleQuestionInputChange = ({

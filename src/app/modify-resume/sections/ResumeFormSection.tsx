@@ -1,14 +1,13 @@
 'use client';
 
 import { ResumeForm } from '@/app/resume/components';
-import { MODAL } from '@/constants';
-import { useModal } from '@/hooks';
+import { useRouter } from 'next/navigation';
 
 export default function ResumeFormSection() {
-  const { openModal } = useModal();
+  const router = useRouter();
 
   const handleConfirmClick = () => {
-    openModal(MODAL.MODIFY_CONFIRM);
+    router.push('/modify-resume/modify-confirm');
   };
 
   return (
