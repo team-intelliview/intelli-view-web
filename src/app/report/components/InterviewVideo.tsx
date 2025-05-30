@@ -1,42 +1,51 @@
-export default function InterviewVideo() {
+'use client';
+
+import { VideoItem } from '@/types';
+import Image from 'next/image';
+import { useState } from 'react';
+
+export default function InterviewVideo({
+  videoData,
+}: {
+  videoData: Array<VideoItem>;
+}) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleArrowBackButtonClick = () => {
+    if (currentIndex === 0) setCurrentIndex(videoData.length - 1);
+    else setCurrentIndex((prev) => prev - 1);
+  };
+
+  const handleArrowNextButtonClick = () => {
+    if (currentIndex === videoData.length - 1) setCurrentIndex(0);
+    else setCurrentIndex((prev) => prev + 1);
+  };
+
   return (
     <>
-      <div className="carousel w-full">
-        <div id="item1" className="carousel-item w-full">
-          <img
-            src="https://img.daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.webp"
-            className="w-full"
-          />
-        </div>
-        <div id="item2" className="carousel-item w-full">
-          <img
-            src="https://img.daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.webp"
-            className="w-full"
-          />
-        </div>
-        <div id="item3" className="carousel-item w-full">
-          <img
-            src="https://img.daisyui.com/images/stock/photo-1414694762283-acccc27bca85.webp"
-            className="w-full"
-          />
-        </div>
-        <div id="item4" className="carousel-item w-full">
-          <img
-            src="https://img.daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.webp"
-            className="w-full"
-          />
-        </div>
-      </div>
-      <div className="flex w-full justify-center gap-2 py-2">
-        <a href="#item1" className="tooltip" data-tip="hello">
-          <button className="btn">질문 1</button>
-        </a>
-        <a href="#item1" className="tooltip" data-tip="hello">
-          <button className="btn">질문 2</button>
-        </a>
-        <a href="#item1" className="tooltip" data-tip="hello">
-          <button className="btn">질문 3</button>
-        </a>
+      <video
+        controls
+        src={videoData[currentIndex].url}
+        className="mx-auto flex w-full items-center rounded-[18px]"
+      />
+      <div className="flex w-full items-center justify-center gap-8">
+        <Image
+          src="/icons/arrow_left.svg"
+          alt="arrow_left"
+          width={24}
+          height={24}
+          onClick={handleArrowBackButtonClick}
+        />
+        <p className="text-headline2 text-gray-80 font-medium">
+          {currentIndex + 1}번 질문
+        </p>
+        <Image
+          src="/icons/arrow_right.svg"
+          alt="arrow_right"
+          width={24}
+          height={24}
+          onClick={handleArrowNextButtonClick}
+        />
       </div>
     </>
   );

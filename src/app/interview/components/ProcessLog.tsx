@@ -12,14 +12,17 @@ interface Props {
 }
 
 export default function ProcessLog({ entireCnt }: Props) {
-  const { logList } = useInterviewState();
+  const { interviews } = useInterviewState();
   const { openModal } = useModal();
 
   useEffect(() => {
-    if (logList.length === entireCnt) {
+    if (
+      interviews.logList.length > 0 &&
+      interviews.logList.length === entireCnt
+    ) {
       openModal(MODAL.COMPLETE_INTERVIEW);
     }
-  }, [logList, entireCnt]);
+  }, [interviews, entireCnt]);
 
   return (
     <div className="border-gray-20 flex w-full flex-col gap-[20px] rounded-[16px] border bg-white px-[20px] py-[24px]">
@@ -32,7 +35,7 @@ export default function ProcessLog({ entireCnt }: Props) {
             height={20}
             alt="finished"
           />
-          {logList.length}개 완료
+          {interviews.logList.length}개 완료
         </p>
         <hr />
         <p className="flex items-center gap-[8px]">
@@ -42,7 +45,7 @@ export default function ProcessLog({ entireCnt }: Props) {
       </div>
       <ul className="timeline timeline-vertical timeline-compact">
         {Array.from({ length: entireCnt }).map((_, index) => {
-          const logItem = logList[index] || { time: '', image: '' };
+          const logItem = interviews.logList[index] || { time: '', image: '' };
           const { time, image } = logItem;
 
           return (
@@ -64,12 +67,12 @@ export default function ProcessLog({ entireCnt }: Props) {
               </div>
               <div className="timeline-end ml-[24px] flex w-fit items-center gap-[32px]">
                 {image ? (
-                  <Image
+                  <img
                     src={image}
                     width={112}
                     height={65}
                     alt="processImage"
-                    className="rounded-[8px]"
+                    className="rounded-[8px] object-cover"
                   />
                 ) : (
                   <div className="bg-gray-70/20 h-[65px] w-[112px] rounded-[8px]" />

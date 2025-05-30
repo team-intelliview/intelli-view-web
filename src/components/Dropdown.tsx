@@ -1,19 +1,22 @@
 import { cn } from '@/utils/string';
 import { useState } from 'react';
-import Image from 'next/image';
+import ArrowUp from '@/assets/icons/arrow_up.svg';
+import ArrowBottom from '@/assets/icons/arrow_bottom.svg';
 
 interface DropdownProps {
-  title: string;
+  question: string;
   children: React.ReactNode;
   className?: string;
+  open?: boolean;
 }
 
 export default function Dropdown({
-  title,
+  question,
   children,
   className,
+  open = false,
 }: DropdownProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(open);
 
   return (
     <div
@@ -23,13 +26,12 @@ export default function Dropdown({
       )}
     >
       <div className="flex justify-between" onClick={() => setIsOpen(!isOpen)}>
-        <p className="text-body1 text-gray-90 font-semibold">{title}</p>
-        <Image
-          width={24}
-          height={24}
-          src={isOpen ? '/icons/arrow_up.svg' : '/icons/arrow_bottom.svg'}
-          alt="arrow"
-        />
+        <p className="text-body1 text-gray-90 font-semibold">{question}</p>
+        {isOpen ? (
+          <ArrowUp width={24} height={24} />
+        ) : (
+          <ArrowBottom width={24} height={24} />
+        )}
       </div>
       <div
         className={cn(

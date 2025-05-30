@@ -2,19 +2,18 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { useCallback } from 'react';
 import {
   interviewAtom,
-  updateInterview,
   deleteAllInterview,
-  updateNowInterviewing,
+  updateInterviewAtom,
 } from '@/atoms/interview';
 import { logListItem } from '@/types';
 
 export function useInterview() {
-  const setInterview = useSetAtom(updateInterview);
+  const setInterview = useSetAtom(updateInterviewAtom);
   const removeAllInterview = useSetAtom(deleteAllInterview);
 
   const addInterview = useCallback(
     (interview: logListItem) => {
-      setInterview(interview);
+      setInterview({ type: 'addLog', log: interview });
     },
     [setInterview],
   );
@@ -28,15 +27,31 @@ export function useInterview() {
 
 export function useInterviewState() {
   const interviews = useAtomValue(interviewAtom);
-  return interviews;
+  const setInterviews = useSetAtom(updateInterviewAtom);
+
+  const updateInterview = useCallback(
+    (log: logListItem) => {
+      setInterviews({ type: 'addLog', log });
+    },
+    [setInterviews],
+  );
+
+  const updateNowInterviewing = useCallback(
+    (index: number) => {
+      setInterviews({ type: 'setNowInterviewing', index });
+    },
+    [setInterviews],
+  );
+
+  return { interviews, updateInterview, updateNowInterviewing };
 }
 
 export function useNowInterviewing() {
-  const setNowInterviewing = useSetAtom(updateNowInterviewing);
+  const setNowInterviewing = useSetAtom(updateInterviewAtom);
 
   const changeNowInterviewing = useCallback(
     (interviewOrder: number) => {
-      setNowInterviewing(interviewOrder);
+      setNowInterviewing({ type: 'setNowInterviewing', index: interviewOrder });
     },
     [setNowInterviewing],
   );
