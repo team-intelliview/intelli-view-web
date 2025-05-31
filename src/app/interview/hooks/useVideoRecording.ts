@@ -43,17 +43,13 @@ export function useVideoRecording({
     interviewVideoMutate(
       { file: formData, index: interviews.nowInterviewing + 1 },
       {
-        onSuccess: () => {
-          console.log('비디오 업로드 성공');
-          setIsChecked(true);
-          changeNowInterviewing(interviews.nowInterviewing + 1);
-        },
-        onError: (error: any) => {
-          console.error('비디오 업로드 실패:', error);
-          setIsChecked(false);
-        },
-      },
-    );
+        onSuccess: async () => {
+          if (questionCnt === interviews.nowInterviewing) {
+            router.push('/interview/end-interview');
+          } else {
+            setIsChecked(true);
+            changeNowInterviewing(interviews.nowInterviewing + 1);
+          }
 
     const duration = await getVideoDuration(webmBlob);
     const screenshot = webcamRef.current?.getScreenshot();

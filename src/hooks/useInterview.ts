@@ -48,6 +48,7 @@ export function useInterviewState() {
 
 export function useNowInterviewing() {
   const setNowInterviewing = useSetAtom(updateInterviewAtom);
+  const nowInterviewing = useAtomValue(interviewAtom).nowInterviewing;
 
   const changeNowInterviewing = useCallback(
     (interviewOrder: number) => {
@@ -56,5 +57,5 @@ export function useNowInterviewing() {
     [setNowInterviewing],
   );
 
-  return { changeNowInterviewing };
+  return { changeNowInterviewing, nowInterviewing };
 }
