@@ -11,7 +11,11 @@ import {
 import { useInterviewVideoMutation } from '../hooks/useInterviewVideoMutation';
 import { useVideoRecording } from '../hooks/useVideoRecording';
 
-export default function VideoSection() {
+interface VideoSectionProps {
+  questionCnt: number;
+}
+
+export const VideoSection = ({ questionCnt }: VideoSectionProps) => {
   const webcamRef = useRef<Webcam | null>(null);
 
   const { addInterview, resetInterview } = useInterview();
@@ -30,11 +34,11 @@ export default function VideoSection() {
     interviews,
     changeNowInterviewing,
     setIsChecked,
+    questionCnt,
   });
 
   const handleInterviewReset = () => {
     resetInterview();
-    changeNowInterviewing(0);
   };
 
   const handleRecording = async () => {
@@ -61,9 +65,11 @@ export default function VideoSection() {
         onClick={handleRecording}
         text={isInterviewing ? '답변 종료' : '답변 시작'}
         variant={isInterviewing ? 'stop' : 'start'}
-        disabled={isPending && !isChecked}
+        disabled={isPending || !isChecked}
       />
       <Button text="면접 초기화" onClick={handleInterviewReset} />
     </div>
   );
-}
+};
+
+export default VideoSection;
