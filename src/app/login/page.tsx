@@ -8,7 +8,7 @@ export default function Login() {
   return (
     <PageLayout className="flex max-w-screen overflow-hidden">
       <Content className="flex gap-[115px]">
-        <div className="flex w-[50%] flex-col gap-[60px] h-full items-center justify-center">
+        <div className="flex h-full w-[50%] flex-col items-center justify-center gap-[60px]">
           <DescribeSection /> <LoginSection />
         </div>
         <PhotoSection />

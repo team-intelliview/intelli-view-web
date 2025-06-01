@@ -1,23 +1,25 @@
 'use client';
 
 import { PATH } from '@/constants';
-import { useUserState } from '@/hooks/useUser';
+import useLogin from '@/hooks/useLogin';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import Loading from '../loading';
 
 const InfoSection = () => {
   const router = useRouter();
-
-  const { name } = useUserState();
+  const { data } = useLogin();
 
   const handleMyResumeClick = () => {
     router.push(PATH.MODIFY_RESUME);
   };
 
+  if (!data) return <Loading />;
+
   return (
-    <div className="flex items-center justify-between py-[48px]">
+    <div className="flex w-full items-center justify-between py-[48px]">
       <p className="text-title2 text-gray-90 font-semibold">
-        👋 {name}님, 안녕하세요
+        👋 {data.name}님, 안녕하세요
       </p>
       <button
         className="flex gap-[4px] hover:cursor-pointer"
