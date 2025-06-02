@@ -4,7 +4,6 @@ import { PATH } from '@/constants';
 import useLogin from '@/hooks/useLogin';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import Loading from '../loading';
 
 const InfoSection = () => {
   const router = useRouter();
@@ -14,10 +13,8 @@ const InfoSection = () => {
     router.push(PATH.MODIFY_RESUME);
   };
 
-  if (!data) return <Loading />;
-
   return (
-    <div className="flex w-full items-center justify-between py-[48px]">
+    <div className="flex h-auto w-full items-center justify-between py-[48px]">
       <p className="text-title2 text-gray-90 font-semibold">
         👋 {data.name}님, 안녕하세요
       </p>
@@ -31,6 +28,7 @@ const InfoSection = () => {
           height={24}
           src="/icons/arrow_right.svg"
           alt="right"
+          className="h-auto w-auto"
         />
       </button>
     </div>
