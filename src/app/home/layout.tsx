@@ -1,4 +1,6 @@
+import { Suspense } from 'react';
 import PageLayout from '../PageLayout';
+import Loading from './loading';
 
 const Layout = ({
   children,
@@ -9,8 +11,10 @@ const Layout = ({
 }) => {
   return (
     <PageLayout homeNav className="flex max-w-screen overflow-hidden">
-      {children}
-      {modal}
+      <Suspense fallback={<Loading />}>
+        {children}
+        {modal}
+      </Suspense>
     </PageLayout>
   );
 };

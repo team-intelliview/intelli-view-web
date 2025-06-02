@@ -1,5 +1,5 @@
 import { createURL, END_POINTS } from '@/constants/api';
-import type { CoverLetterItem, QuestionRequestStatus } from '@/types';
+import type { CoverLetterItem, RequestStatus } from '@/types';
 import { QuestionItem } from '@/types/question';
 import { addSearchParams, fetchRequest } from '@/utils';
 
@@ -50,7 +50,8 @@ export const postInterviewQuestion = async ({
 
 export const getInterviewsStatus = async () => {
   const interviewId = sessionStorage.getItem('interviewId');
-  const { data } = await fetchRequest<QuestionRequestStatus>({
+
+  const { data } = await fetchRequest<RequestStatus>({
     url: createURL(END_POINTS.INTERVIEW_STATUS(interviewId)),
   });
 

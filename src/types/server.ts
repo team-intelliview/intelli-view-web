@@ -1,4 +1,4 @@
-import { QUESTION_REQUEST_STATUS, STATUS } from '@/constants/api';
+import { REQUEST_STATUS, STATUS } from '@/constants/api';
 
 export type StatusOption = keyof typeof STATUS;
 
@@ -27,4 +27,4 @@ export type Pagination<T = unknown> = {
   pageable: PagiableItem;
 };
 
-export type QuestionRequestStatus = keyof typeof QUESTION_REQUEST_STATUS;
+export type RequestStatus = keyof typeof REQUEST_STATUS;

@@ -1,6 +1,6 @@
 import { ProcessingStatus } from './coverLetter';
 
-export interface LogListItem {
+export type InterviewItem = {
   id: string;
   title: string;
   status: ProcessingStatus;
@@ -8,5 +8,4 @@ export interface LogListItem {
   totalQuestion: number;
   completeQuestion: number;
   updatedAt: string;
-  image?: string;
-}
+};
