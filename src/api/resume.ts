@@ -36,6 +36,7 @@ export const getResume = async () => {
       certification: '',
       etc: '',
     };
+
     return resume;
   } else {
     throw new Error(message);

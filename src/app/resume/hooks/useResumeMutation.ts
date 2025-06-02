@@ -3,15 +3,15 @@ import { STATUS } from '@/constants/api';
 import { useMutation } from '@tanstack/react-query';
 
 interface Props {
-  handleNext:()=>void;
+  handleNext: () => void;
 }
 
-export const useResumeMutation = ({handleNext}:Props) => {
+export const useResumeMutation = ({ handleNext }: Props) => {
   const mutation = useMutation({
     mutationFn: postResume,
-    onSuccess: ({ status, message, data }) => {
+    onSuccess: ({ status, message }) => {
       if (status === STATUS.OK) {
-        handleNext()
+        handleNext();
       } else {
         throw new Error(message);
       }
