@@ -5,14 +5,14 @@ import { fetchRequest } from '@/utils';
 interface PutJobInfoParams {
   jd: string;
 }
-interface JobIdType {
+interface JobIdResponse {
   id: string;
 }
 
 export const postJobInfo = async ({ company, position }: JobInfoItem) => {
   const url = createURL(END_POINTS.JOBS);
 
-  const response = await fetchRequest<JobIdType>({
+  const response = await fetchRequest<JobIdResponse>({
     url,
     options: { method: 'POST', body: JSON.stringify({ company, position }) },
   });
