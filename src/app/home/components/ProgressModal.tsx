@@ -17,12 +17,7 @@ const ProgressModal = () => {
   ) => {
     event.stopPropagation();
     changeInterviewType(type);
-    router.push(PATH.WRITE_SORT);
-  };
-
-  const handleClose = (event: React.MouseEvent) => {
-    event.stopPropagation();
-    router.back();
+    router.push(PATH.JOB);
   };
 
   return (
@@ -52,12 +47,6 @@ const ProgressModal = () => {
             }
           />
         </div>
-        <button
-          className="mt-4 text-gray-50 hover:underline"
-          onClick={handleClose}
-        >
-          닫기
-        </button>
       </div>
     </Modal>
   );

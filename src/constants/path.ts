@@ -1,7 +1,7 @@
 export const PATH = {
   HOME: '/home',
   LOGIN: '/login',
-  WRITE_SORT: '/write-sort',
+  JOB: '/job',
   QUESTIONS: '/questions',
   JOB_DESCRIPTION: '/job-description',
   COVER_LETTER: '/cover-letter',

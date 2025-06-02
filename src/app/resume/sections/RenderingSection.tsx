@@ -4,7 +4,6 @@ import Button from '@/components/Button';
 import { PATH } from '@/constants';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import MovingButton from '@/widgets/MovingButton';
 import { FileInput, ResumeForm } from '../components';
 
 export default function RenderingSection() {
@@ -12,7 +11,7 @@ export default function RenderingSection() {
   const [resumeType, setResumeType] = useState('write');
 
   const handleBackClick = () => {
-    router.push(PATH.WRITE_SORT);
+    router.push(PATH.JOB);
   };
   const handleNextClick = () => {
     router.push(PATH.JOB_DESCRIPTION);

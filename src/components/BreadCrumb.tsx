@@ -26,7 +26,7 @@ export default function BreadCrumb() {
 
   useEffect(() => {
     switch (pathname) {
-      case PATH.WRITE_SORT:
+      case PATH.JOB:
       case PATH.JOB_DESCRIPTION:
       case PATH.QUESTIONS:
       case PATH.COVER_LETTER:
