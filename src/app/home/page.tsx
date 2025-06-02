@@ -1,7 +1,8 @@
 import dynamic from 'next/dynamic';
 import Content from '@/components/Content';
 import { Suspense } from 'react';
-import Loading from './loading';
+import Loading from '@/components/Loading';
+import { REQUEST_OPTION } from '@/constants';
 
 const InfoSection = dynamic(() => import('./sections/InfoSection'));
 const LogSection = dynamic(() => import('./sections/LogSection'));

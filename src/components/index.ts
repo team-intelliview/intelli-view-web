@@ -13,3 +13,4 @@ export * from './Textbox';
 export * from './BreadCrumb';
 export * from './Dropdown';
 export * from './Modal';
+export * from './Loading'
