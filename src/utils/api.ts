@@ -1,83 +1,45 @@
-'use client';
-
-import { PATH } from '@/constants';
 import { createURL, END_POINTS } from '@/constants/api';
-import { ServerResponse } from '@/types';
+import { getAccessToken, getCookie, getRefreshToken, setTokens } from './token';
+import { ServerResponse } from '@/types/server';
 
-interface fetchWithTokenProps {
+interface FetchWithTokenProps {
   url: string;
   options?: RequestInit;
   contentType?: boolean;
 }
 
-export default function getApiUrl(endPoint: string) {
-  return new URL(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/${endPoint}`);
-}
+async function getNewAccessToken() {
+  const response = await fetch(createURL(END_POINTS.REISSUE), {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
 
-export function getAccessToken(): string | null {
-  if (typeof window === 'undefined') return null;
-  return sessionStorage.getItem('ACCESS_TOKEN');
-}
+  if (!response.ok) {
+    return false;
+  }
 
-export function getRefreshToken(): string | null {
-  if (typeof window === 'undefined') return null;
-  return sessionStorage.getItem('REFRESH_TOKEN');
-}
+  const result = await response.json();
 
-export function setTokens(accessToken: string, refreshToken: string) {
-  if (typeof window === 'undefined') return;
-  sessionStorage.setItem('ACCESS_TOKEN', accessToken);
-  sessionStorage.setItem('REFRESH_TOKEN', refreshToken);
-}
-
-export function removeTokens() {
-  if (typeof window === 'undefined') return;
-  sessionStorage.removeItem('ACCESS_TOKEN');
-  sessionStorage.removeItem('REFRESH_TOKEN');
-}
-
-export function getCookie(cookieName: string): string | null {
-  if (typeof window === 'undefined') return null; // SSR에서 방지
-
-  const cookieData = document.cookie;
-  const cookieNameEq = `${cookieName}=`;
-  const start = cookieData.indexOf(cookieNameEq);
-  if (start === -1) return null;
-
-  const end =
-    cookieData.indexOf(';', start) === -1
-      ? cookieData.length
-      : cookieData.indexOf(';', start);
-
-  return decodeURIComponent(
-    cookieData.substring(start + cookieNameEq.length, end),
-  );
+  return result;
 }
 
 async function reissueToken(): Promise<boolean> {
   try {
-    const response = await fetch(createURL(END_POINTS.REISSUE), {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    if (!response.ok) {
-      return false;
-    }
-
-    const result = await response.json();
-
-    const accessToken = result?.data?.token;
     const refreshToken = getCookie('refresh_token');
+    const response = await getNewAccessToken();
+
+    const accessToken = response?.data?.token;
 
     if (!accessToken || !refreshToken) {
       return false;
     }
 
-    setTokens(accessToken, refreshToken);
+    if (typeof window !== 'undefined') {
+      setTokens(accessToken, refreshToken);
+    }
 
     return true;
   } catch (error) {
@@ -89,25 +51,31 @@ export async function fetchRequest<T>({
   url,
   options,
   contentType = true,
-}: fetchWithTokenProps) {
+}: FetchWithTokenProps): Promise<ServerResponse<T>> {
   let token = getAccessToken();
 
   if (!token) {
-    const reissued = await reissueToken();
-    if (reissued) {
-      token = getAccessToken();
-    } else throw new Error('액세스 토큰 발급 실패');
+    const renewedToken = await reissueToken();
+    if (!renewedToken) token = getRefreshToken();
   }
 
-  const response = await fetch(url, {
-    ...options,
-    headers: {
-      ...(options?.headers || {}),
-      ...(contentType && { 'Content-Type': 'application/json' }),
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  async function fetching(): Promise<ServerResponse<T>> {
+    const res = await fetch(url, {
+      ...options,
+      headers: {
+        ...(options?.headers || {}),
+        ...(contentType && { 'Content-Type': 'application/json' }),
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-  const data = await response.json();
-  return data as ServerResponse<T>;
+    if (!res.ok) {
+      throw new Error(`Request failed with status ${res.status}`);
+    }
+
+    const data = await res.json();
+    return data as ServerResponse<T>;
+  }
+
+  return fetching();
 }
