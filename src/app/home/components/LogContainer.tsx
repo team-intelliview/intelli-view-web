@@ -9,13 +9,12 @@ import { cn, toKoreanRequestType } from '@/utils';
 import { useRouter } from 'next/navigation';
 import { useRef } from 'react';
 import { LogCardList } from './LogCardList';
-import { EmptyContent } from './EmptyContent';
-import Message from '@/assets/icons/message.svg';
-import Paper from '@/assets/icons/paper.svg';
+import { RequestOption } from '@/types/content';
+import EmptyContent from './EmptyContent';
+import { useLogList } from '../hooks/useLogList';
 
 interface LogContainerProps {
   type: RequestOption;
-  log: Array<LogListItem>;
 }
 
 export const LogContainer = ({ type, log }: LogContainerProps) => {

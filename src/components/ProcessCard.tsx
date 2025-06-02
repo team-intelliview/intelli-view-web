@@ -1,7 +1,5 @@
-'use client';
-
-import { PROGRESSING_STATUS } from '@/constants';
-import { CoverLetterList } from '@/types';
+import { REQUEST_STATUS } from '@/constants/api';
+import { LogListItem } from '@/types';
 import { cn } from '@/utils/string';
 import dayjs from 'dayjs';
 import Image from 'next/image';
@@ -31,7 +29,7 @@ export default function ProcessCard({
       <div
         className={cn(
           'absolute top-0 left-0 h-full w-[6px] rounded-l-[12px]',
-          status === PROGRESSING_STATUS.IN_PROGRESS
+          status === REQUEST_STATUS.IN_PROGRESS
             ? 'bg-primary-100'
             : 'bg-gray-60',
         )}

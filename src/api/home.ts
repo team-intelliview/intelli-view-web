@@ -1,10 +1,7 @@
 import { createURL, END_POINTS, STATUS } from '@/constants/api';
-import type {
-  LogListItem,
-  InterviewItem,
-  Pagination,
-  PaginationParams,
-} from '@/types';
+import { LogListItem } from '@/types/home';
+import { InterviewItem } from '@/types/interview';
+import type { Pagination, PaginationParams } from '@/types/server';
 import { addSearchParams, fetchRequest } from '@/utils';
 
 export const getCoverLetters = async ({
@@ -14,11 +11,11 @@ export const getCoverLetters = async ({
   const params = { page, size };
   const url = createURL(END_POINTS.COVER_LETTERS);
 
-  const { status, message, data } = await fetchRequest<
-    Pagination<LogListItem>
-  >({
-    url: addSearchParams(url, params),
-  });
+  const { status, message, data } = await fetchRequest<Pagination<LogListItem>>(
+    {
+      url: addSearchParams(url, params),
+    },
+  );
 
   if (status !== STATUS.OK) {
     throw new Error(message);
@@ -34,11 +31,11 @@ export const getInterviews = async ({
   const params = { page, size };
   const url = createURL(END_POINTS.INTERVIEW);
 
-  const { status, message, data } = await fetchRequest<
-    Pagination<LogListItem>
-  >({
-    url: addSearchParams(url, params),
-  });
+  const { status, message, data } = await fetchRequest<Pagination<LogListItem>>(
+    {
+      url: addSearchParams(url, params),
+    },
+  );
 
   if (status !== STATUS.OK) {
     throw new Error(message);
