@@ -7,7 +7,7 @@ export const useJobsMutation = () => {
     mutationFn: postJobInfo,
     onSuccess: ({ status, message, data }) => {
       if (status === STATUS.OK) {
-  sessionStorage.setItem('jobId', data.id);
+        sessionStorage.setItem('jobId', data.id);
       } else {
         throw new Error(message);
       }
@@ -16,7 +16,5 @@ export const useJobsMutation = () => {
 
   return {
     jobsMutate: mutation.mutate,
-    isPending: mutation.isPending,
-    isSuccess: mutation.isSuccess,
   };
 };
