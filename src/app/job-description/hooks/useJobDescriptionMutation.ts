@@ -5,10 +5,8 @@ import { putJobDescription } from '@/api/job';
 export const useJobDescriptionMutation = () => {
   const mutation = useMutation({
     mutationFn: putJobDescription,
-    onSuccess: ({ status, message, data }) => {
-      if (status === STATUS.OK) {
-        console.log(data);
-      } else {
+    onSuccess: ({ status, message }) => {
+      if (status !== STATUS.OK) {
         throw new Error(message);
       }
     },
@@ -16,7 +14,5 @@ export const useJobDescriptionMutation = () => {
 
   return {
     jobDescriptionMutate: mutation.mutate,
-    isPending: mutation.isPending,
-    isSuccess: mutation.isSuccess,
   };
 };

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getInterviewsQuestion, getInterviewsStatus } from '@/api/interview';
-import { QUESTION_REQUEST_STATUS } from '@/constants/api';
+import { REQUEST_STATUS } from '@/constants/api';
 import type { QuestionItem } from '@/types/question';
 
 export function useQuestionList() {
@@ -13,7 +13,7 @@ export function useQuestionList() {
     const pollingStatus = async () => {
       try {
         const result = await getInterviewsStatus();
-        const isSuccess = result === QUESTION_REQUEST_STATUS.QUESTION_COMPLETE;
+        const isSuccess = result === REQUEST_STATUS.COMPLETED;
 
         if (!isMounted) return;
 
