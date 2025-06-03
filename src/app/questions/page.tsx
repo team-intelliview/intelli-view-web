@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import PageLayout from '../PageLayout';
 import Content from '@/components/Content';
 import QuestionSection from './sections/QuestionSection';

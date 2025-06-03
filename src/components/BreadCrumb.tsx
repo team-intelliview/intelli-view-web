@@ -1,3 +1,5 @@
+'use client';
+
 import { PATH, REQUEST_OPTION } from '@/constants';
 import { useContentState } from '@/hooks';
 import { cn, toKoreanRequestType } from '@/utils';

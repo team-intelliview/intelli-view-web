@@ -15,17 +15,17 @@ interface VideoSectionProps {
   questionCnt: number;
 }
 
-export const VideoSection = ({ questionCnt }: VideoSectionProps) => {
+const VideoSection = ({ questionCnt }: VideoSectionProps) => {
   const webcamRef = useRef<Webcam | null>(null);
 
   const { addInterview, resetInterview } = useInterview();
   const { interviews } = useInterviewState();
   const { changeNowInterviewing } = useNowInterviewing();
 
-  const { interviewVideoMutate, isPending } = useInterviewVideoMutation();
+  const { interviewVideoMutate, isPending, isSuccess } =
+    useInterviewVideoMutation();
 
   const [isInterviewing, setIsInterviewing] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
 
   const { handleStartRecording, handleStopRecording } = useVideoRecording({
     webcamRef,
@@ -33,7 +33,6 @@ export const VideoSection = ({ questionCnt }: VideoSectionProps) => {
     addInterview,
     interviews,
     changeNowInterviewing,
-    setIsChecked,
     questionCnt,
   });
 
@@ -65,7 +64,7 @@ export const VideoSection = ({ questionCnt }: VideoSectionProps) => {
         onClick={handleRecording}
         text={isInterviewing ? '답변 종료' : '답변 시작'}
         variant={isInterviewing ? 'stop' : 'start'}
-        disabled={isPending || !isChecked}
+        disabled={isPending && !isSuccess}
       />
       <Button text="면접 초기화" onClick={handleInterviewReset} />
     </div>

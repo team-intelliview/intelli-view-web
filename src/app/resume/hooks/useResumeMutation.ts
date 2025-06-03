@@ -1,4 +1,4 @@
-import { postResume } from '@/api/resume';
+import { postResume } from '@/lib/api/resume';
 import { STATUS } from '@/constants/api';
 import { useMutation } from '@tanstack/react-query';
 

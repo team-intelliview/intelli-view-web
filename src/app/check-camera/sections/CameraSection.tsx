@@ -9,7 +9,6 @@ export default function CameraSection() {
   const router = useRouter();
 
   const [isUsingCamera, setIsUsingCamera] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
 
   const handleMuteToggle = () => {
     setIsUsingCamera((prev) => !prev);
@@ -24,16 +23,14 @@ export default function CameraSection() {
     <div className="flex h-full w-[50%] flex-col justify-between gap-[20px]">
       <div className="flex flex-col items-center gap-[20px]">
         {isUsingCamera ? (
-          !isChecked && (
-            <Webcam
-              id="checkCamera"
-              className="rounded-[24px]"
-              audio={false}
-              screenshotFormat="image/jpeg"
-              width={673}
-              mirrored
-            />
-          )
+          <Webcam
+            id="checkCamera"
+            className="rounded-[24px]"
+            audio={false}
+            screenshotFormat="image/jpeg"
+            width={673}
+            mirrored
+          />
         ) : (
           <div className="bg-gray-20 h-[504px] w-[673px] place-content-center rounded-[24px] text-center">
             <p className="text-gray-70 font-medium">

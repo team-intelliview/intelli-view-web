@@ -1,4 +1,4 @@
-import { getResume } from '@/api/resume';
+import { getResume } from '@/lib/api/resume';
 import { QUERY_KEYS } from '@/constants/api';
 import { useSuspenseQuery } from '@tanstack/react-query';
 

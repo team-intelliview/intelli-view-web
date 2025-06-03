@@ -1,14 +1,21 @@
 import { useState, useEffect } from 'react';
 
+import { FeedbackItem, RequestOption } from '@/types';
+import { REQUEST_OPTION } from '@/constants';
 import { REQUEST_STATUS } from '@/constants/api';
-import type { QuestionItem } from '@/types/question';
+import { getInterviewsStatus } from '@/lib/api/interview';
 import {
-  getInterviewsQuestion,
-  getInterviewsStatus,
-} from '@/lib/api/interview';
+  getCoverLetterFeedback,
+  getCoverLetterStatus,
+  getInterviewFeedback,
+} from '@/lib/api/feedback';
 
-export function useQuestionList() {
-  const [questionList, setQuestionList] = useState<QuestionItem[]>([]);
+interface Props {
+  type: RequestOption;
+}
+
+export const useFeedback = ({ type }: Props) => {
+  const [feedback, setFeedback] = useState<FeedbackItem>();
   const [isPollingComplete, setIsPollingComplete] = useState(false);
 
   useEffect(() => {
@@ -16,13 +23,18 @@ export function useQuestionList() {
 
     const pollingStatus = async () => {
       try {
-        const result = await getInterviewsStatus();
+        const result =
+          type === REQUEST_OPTION.INTERVIEW
+            ? await getInterviewsStatus()
+            : await getCoverLetterStatus();
         const isSuccess = result === REQUEST_STATUS.COMPLETED;
 
         if (!isMounted) return;
 
         if (isSuccess) {
           setIsPollingComplete(true);
+        } else if (result === REQUEST_STATUS.REQUEST_FAILED) {
+          console.error('Request failed');
         } else {
           setTimeout(pollingStatus, 2000);
         }
@@ -42,8 +54,11 @@ export function useQuestionList() {
     if (isPollingComplete) {
       const fetchQuestions = async () => {
         try {
-          const data = await getInterviewsQuestion();
-          setQuestionList(data.contents);
+          const data =
+            type === REQUEST_OPTION.INTERVIEW
+              ? await getInterviewFeedback()
+              : await getCoverLetterFeedback();
+          setFeedback(data);
         } catch (error) {
           console.error('Failed to fetch questions:', error);
         }
@@ -53,5 +68,5 @@ export function useQuestionList() {
     }
   }, [isPollingComplete]);
 
-  return { questionList, isPollingComplete, setQuestionList };
-}
+  return { feedback, isPollingComplete };
+};

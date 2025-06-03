@@ -10,7 +10,6 @@ import { useJobDescriptionMutation } from '../hooks/useJobDescriptionMutation';
 export default function WriteSection() {
   const router = useRouter();
   const { jobDescriptionMutate } = useJobDescriptionMutation();
-
   const [jd, setJd] = useState('');
 
   const handleBackClick = () => {

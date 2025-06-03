@@ -1,7 +1,7 @@
 import { cn } from '@/utils/string';
 import { useState } from 'react';
-import ArrowUp from '@/assets/icons/arrow_up.svg';
-import ArrowBottom from '@/assets/icons/arrow_bottom.svg';
+import ArrowUp from '@assets/icons/arrow_up.svg';
+import ArrowBottom from '@assets/icons/arrow_bottom.svg';
 
 interface DropdownProps {
   question: string;

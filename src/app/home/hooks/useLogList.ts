@@ -1,8 +1,8 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { getCoverLetters, getInterviews } from '@/api/home';
 import { REQUEST_OPTION } from '@/constants';
 import { QUERY_KEYS } from '@/constants/api';
 import { RequestOption } from '@/types';
+import { getCoverLetters, getInterviews } from '@/lib/api/home';
 
 interface Props {
   type: RequestOption;

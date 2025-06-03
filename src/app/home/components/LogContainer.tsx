@@ -17,6 +17,8 @@ const LogContainer = ({ type }: LogContainerProps) => {
 
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  if (!data) return null;
+
   return (
     <div
       ref={scrollRef}

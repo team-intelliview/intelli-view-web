@@ -1,13 +1,13 @@
 'use client';
 
 import { useState } from 'react';
+import useResume from '../hooks/useResume';
+import { useResumeMutation } from '../hooks/useResumeMutation';
+import Loading from '@/components/Loading';
 import Textfield from '@/components/Textfield';
 import { DOCS_MAX_LENGTH } from '@/constants';
 import MovingButton from '@/widgets/MovingButton';
 import Button from '@/components/Button';
-import { useResumeMutation } from '../hooks/useResumeMutation';
-import useResume from '../hooks/useResume';
-import Loading from '@/components/Loading';
 
 interface ResumeFormProps {
   hasMovingButton: boolean;
@@ -40,6 +40,7 @@ const ResumeForm = ({
   };
 
   if (isLoading) return <Loading />;
+  if (!data) return null;
 
   return (
     <div className="flex flex-col">

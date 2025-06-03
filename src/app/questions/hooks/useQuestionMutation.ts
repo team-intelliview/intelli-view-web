@@ -1,15 +1,12 @@
-import { patchInterviewsQuestion } from '@/api/interview';
 import { STATUS } from '@/constants/api';
+import { patchInterviewsQuestion } from '@/lib/api/interview';
 import { useMutation } from '@tanstack/react-query';
-import { toast } from 'react-toastify';
 
 export const useQuestionMutation = () => {
   const mutation = useMutation({
     mutationFn: patchInterviewsQuestion,
     onSuccess: ({ status, message }) => {
-      if (status === STATUS.OK) {
-        toast('질문이 저장됐어요.');
-      } else {
+      if (status !== STATUS.OK) {
         throw new Error(message);
       }
     },

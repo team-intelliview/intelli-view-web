@@ -6,11 +6,15 @@ interface PostCoverLetterProps {
   contents: Array<CoverLetterItem>;
 }
 
+interface PostCoverLetterResponse {
+  id: string;
+}
+
 export const postCoverLetter = async ({ contents }: PostCoverLetterProps) => {
   const jobId = sessionStorage.getItem('jobId');
   const url = createURL(END_POINTS.COVER_LETTERS);
 
-  const response = await fetchRequest<string>({
+  const response = await fetchRequest<PostCoverLetterResponse>({
     url: addSearchParams(url, { jobId }),
     options: { method: 'POST', body: JSON.stringify({ contents }) },
   });
