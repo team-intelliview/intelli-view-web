@@ -3,10 +3,10 @@
 import { PATH } from '@/constants';
 import MovingButton from '@/widgets/MovingButton';
 import dynamic from 'next/dynamic';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useVoiceVisualizer } from 'react-voice-visualizer';
+import Checked from '@/assets/icons/checked.svg';
 
 const VoiceVisualizer = dynamic(
   () => import('react-voice-visualizer').then((mod) => mod.VoiceVisualizer),
@@ -15,29 +15,17 @@ const VoiceVisualizer = dynamic(
 
 export default function VoiceSection() {
   const router = useRouter();
-
   const [isChecked, setIsChecked] = useState(false);
-  const [onRec, setOnRec] = useState(false);
 
   const recorderControls = useVoiceVisualizer({
     onStopRecording: () => setIsChecked(true),
   });
-  const { startRecording, stopRecording, recordedBlob } = recorderControls;
 
   const handleBackClick = () => {
     router.push(PATH.QUESTIONS);
   };
   const handleNextClick = () => {
     router.push(PATH.CHECK_CAMERA);
-  };
-
-  const handleMuteToggle = () => {
-    setOnRec((prevState) => !prevState);
-    if (onRec) {
-      stopRecording();
-    } else {
-      startRecording();
-    }
   };
 
   return (
@@ -57,12 +45,7 @@ export default function VoiceSection() {
               animateCurrentPick={false}
             />
           ) : (
-            <Image
-              src={'/icons/checked.svg'}
-              alt="microphone"
-              width={52}
-              height={52}
-            />
+            <Checked width={52} height={52} />
           )}
         </div>
       </div>
