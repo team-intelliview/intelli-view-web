@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import Content from '@/components/Content';
 import PageLayout from '../PageLayout';
 import { RenderingSection } from './sections';

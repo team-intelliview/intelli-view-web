@@ -1,13 +1,12 @@
-import dynamic from 'next/dynamic';
+export const dynamic = 'force-dynamic';
+
 import Content from '@/components/Content';
 import { Suspense } from 'react';
+import { InfoSection, LogSection } from './sections';
 import Loading from '@/components/Loading';
 import { REQUEST_OPTION } from '@/constants';
 
-const InfoSection = dynamic(() => import('./sections/InfoSection'));
-const LogSection = dynamic(() => import('./sections/LogSection'));
-
-export default function Home() {
+export default async function Home() {
   return (
     <Content className="flex-col items-center">
       <div className="bg-primary-40 flex h-2/5 w-full" />

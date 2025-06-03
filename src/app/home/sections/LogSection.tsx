@@ -1,15 +1,15 @@
 'use client';
 
-import { PATH, REQUEST_OPTION } from '@/constants';
-import LogContainer from '../components/LogContainer';
-import { RequestOption } from '@/types';
-import { cn, toKoreanRequestType } from '@/utils';
-import Card from '@/components/Card';
-import Button from '@/components/Button';
-import { useContent } from '@/hooks';
 import { useRouter } from 'next/navigation';
-import Message from '@/assets/icons/message.svg';
-import Paper from '@/assets/icons/paper.svg';
+import { RequestOption } from '@/types';
+import { useContent } from '@/hooks';
+import { PATH, REQUEST_OPTION } from '@/constants';
+import Card from '@/components/Card';
+import { cn, toKoreanRequestType } from '@/utils';
+import Button from '@/components/Button';
+import LogContainer from '../components/LogContainer';
+import Message from '@assets/icons/message.svg';
+import Paper from '@assets/icons/paper.svg';
 interface LogSectionProps {
   type: RequestOption;
 }

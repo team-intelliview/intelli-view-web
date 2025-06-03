@@ -1,9 +1,9 @@
-'use client'
+'use client';
 
 import Button from '@/components/Button';
 import { PATH } from '@/constants';
 import { useRouter } from 'next/navigation';
-import PartyPopper from '@/assets/icons/party_popper.svg';
+import PartyPopper from '@assets/icons/party_popper.svg';
 import Modal from '@/components/Modal';
 
 export default function CompleteInterviewModal() {

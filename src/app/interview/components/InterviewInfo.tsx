@@ -2,9 +2,9 @@
 
 import { useContentState } from '@/hooks';
 import { toKoreanRequestType } from '@/utils';
-import Marker from '@/assets/icons/marker.svg';
-import Luggage from '@/assets/icons/luggage.svg';
-import Person from '@/assets/icons/person.svg';
+import Marker from '@assets/icons/marker.svg';
+import Luggage from '@assets/icons/luggage.svg';
+import Person from '@assets/icons/person.svg';
 
 export default function InterviewInfoSection() {
   const { job, compony, type, interviewType } = useContentState();

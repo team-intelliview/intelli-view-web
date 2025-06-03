@@ -2,9 +2,9 @@ import { REQUEST_OPTION } from '@/constants';
 import { useContent } from '@/hooks';
 import { RequestOption } from '@/types';
 import { cn } from '@/utils';
-import MessageBlink from '@/assets/icons/message_blink.svg';
-import PaperBlink from '@/assets/icons/paper_blink.svg';
-import Plus from '@/assets/icons/plus.svg';
+import MessageBlink from '@assets/icons/message_blink.svg';
+import PaperBlink from '@assets/icons/paper_blink.svg';
+import Plus from '@assets/icons/plus.svg';
 
 const EmptyContent = ({ type }: { type: RequestOption }) => {
   const { changeType } = useContent();

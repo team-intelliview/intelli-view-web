@@ -13,6 +13,8 @@ const InfoSection = () => {
     router.push(PATH.MODIFY_RESUME);
   };
 
+  if (!data) return null;
+
   return (
     <div className="flex h-auto w-full items-center justify-between py-[48px]">
       <p className="text-title2 text-gray-90 font-semibold">

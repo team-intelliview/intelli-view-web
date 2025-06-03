@@ -2,11 +2,8 @@
 
 import Button from '@/components/Button';
 import Image from 'next/image';
-import { useRecreateQuestionMutation } from '../hooks/useRecreateQuestionMutation';
 
 export default function TitleBox() {
-  const { recreateQuestionMutation, isPending } = useRecreateQuestionMutation();
-
   const handleRecrateQuestion = () => {};
 
   return (
@@ -25,7 +22,6 @@ export default function TitleBox() {
             text="질문 재생성"
             size="sm"
             variant="secondary"
-            disabled={isPending}
             onClick={handleRecrateQuestion}
           />
         </div>

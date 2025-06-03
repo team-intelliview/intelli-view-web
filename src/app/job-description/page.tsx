@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import Content from '@/components/Content';
 import PageLayout from '../PageLayout';
 import WriteSection from './sections/WriteSection';
@@ -19,7 +21,7 @@ export default function JobDescription() {
             무엇인지 등을 정리한 문서예요
           </p>
         </div>
-        <WriteSection/>
+        <WriteSection />
       </Content>
     </PageLayout>
   );

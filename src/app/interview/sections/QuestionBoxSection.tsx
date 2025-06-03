@@ -1,8 +1,8 @@
 'use client';
 
-import {  useNowInterviewing } from '@/hooks/useInterview';
+import { useNowInterviewing } from '@/hooks/useInterview';
 import { QuestionItem } from '@/types/question';
-import Paper from '@/assets/icons/paper.svg';
+import Paper from '@assets/icons/paper.svg';
 
 interface QuestionBoxSectionProps {
   questionList: QuestionItem[];

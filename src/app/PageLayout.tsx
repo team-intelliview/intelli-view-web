@@ -1,4 +1,4 @@
-import HomeNav from '@/components/Nav';
+import HomeNav from '@/components/Nav/HomeNav';
 import { cn } from '../utils/string';
 import InterviewNav from '@/components/Nav/InterviewNav';
 import ReportNav from '@/components/Nav/ReportNav';
