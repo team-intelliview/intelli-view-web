@@ -1,5 +1,5 @@
 import { createURL, END_POINTS } from '@/constants/api';
-import { getAccessToken, getCookie, getRefreshToken, setTokens } from './token';
+import { getAccessToken, getCookie, setTokens } from './token';
 import { ServerResponse } from '@/types/server';
 
 interface FetchWithTokenProps {
@@ -7,6 +7,9 @@ interface FetchWithTokenProps {
   options?: RequestInit;
   contentType?: boolean;
 }
+
+let isTokenRefreshing = false;
+let waitTokenRefreshing: Array<() => void> = [];
 
 async function getNewAccessToken() {
   const response = await fetch(createURL(END_POINTS.REISSUE), {
@@ -55,8 +58,26 @@ export async function fetchRequest<T>({
   let token = getAccessToken();
 
   if (!token) {
-    const renewedToken = await reissueToken();
-    if (!renewedToken) token = getRefreshToken();
+    if (!isTokenRefreshing) {
+      isTokenRefreshing = true;
+
+      const renewedToken = await reissueToken();
+
+      if (renewedToken) {
+        token = getAccessToken();
+      }
+
+      waitTokenRefreshing.forEach((cb) => cb());
+      waitTokenRefreshing = [];
+
+      isTokenRefreshing = false;
+    } else {
+      await new Promise<void>((resolve) => {
+        waitTokenRefreshing.push(() => resolve());
+      });
+
+      token = getAccessToken();
+    }
   }
 
   async function fetching(): Promise<ServerResponse<T>> {
