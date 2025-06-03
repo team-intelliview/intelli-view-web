@@ -1,14 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { getResume } from '@/api/resume';
+import { useState } from 'react';
 import Textfield from '@/components/Textfield';
 import { DOCS_MAX_LENGTH } from '@/constants';
-import { QUERY_KEYS } from '@/constants/api';
 import MovingButton from '@/widgets/MovingButton';
 import Button from '@/components/Button';
 import { useResumeMutation } from '../hooks/useResumeMutation';
+import useResume from '../hooks/useResume';
+import Loading from '@/components/Loading';
 
 interface ResumeFormProps {
   hasMovingButton: boolean;
@@ -16,27 +15,20 @@ interface ResumeFormProps {
   handleNextClick: () => void;
 }
 
-const useResume = async () => {
-  const response = await getResume();
-  return response;
-};
-
-export default function ResumeForm({
+const ResumeForm = ({
   hasMovingButton,
   handleBackClick,
   handleNextClick,
-}: ResumeFormProps) {
-  const { resumeMutate, isSuccess: isResumeMutationSuccess } =
-    useResumeMutation({ handleNext: handleNextClick });
-  const { data, isSuccess } = useQuery({
-    queryKey: [QUERY_KEYS.RESUME],
-    queryFn: useResume,
-  });
+}: ResumeFormProps) => {
+  const { resumeMutate } = useResumeMutation({ handleNext: handleNextClick });
+  const { data, isLoading } = useResume();
 
-  const [educationValue, setEducationValue] = useState('');
-  const [employmentValue, setEmploymentValue] = useState('');
-  const [certificationValue, setCertificationValue] = useState('');
-  const [etcValue, setEtcValue] = useState('');
+  const [educationValue, setEducationValue] = useState(data.education);
+  const [employmentValue, setEmploymentValue] = useState(data.employment);
+  const [certificationValue, setCertificationValue] = useState(
+    data.certification,
+  );
+  const [etcValue, setEtcValue] = useState(data.etc);
 
   const handleNextButtonClick = () => {
     resumeMutate({
@@ -47,15 +39,7 @@ export default function ResumeForm({
     });
   };
 
-  useEffect(() => {
-    if (isSuccess && data) {
-      const { education, employment, certification, etc } = data;
-      setEducationValue(education);
-      setEmploymentValue(employment);
-      setCertificationValue(certification);
-      setEtcValue(etc);
-    }
-  }, [data, isSuccess]);
+  if (isLoading) return <Loading />;
 
   return (
     <div className="flex flex-col">
@@ -119,4 +103,6 @@ export default function ResumeForm({
       </div>
     </div>
   );
-}
+};
+
+export default ResumeForm;

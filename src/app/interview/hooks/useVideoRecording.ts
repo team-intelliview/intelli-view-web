@@ -12,7 +12,6 @@ interface UseVideoRecordingParams {
   addInterview: Function;
   interviews: InterviewInfo;
   changeNowInterviewing: Function;
-  setIsChecked: React.Dispatch<React.SetStateAction<boolean>>;
   questionCnt: number;
 }
 
@@ -22,7 +21,6 @@ export function useVideoRecording({
   addInterview,
   interviews,
   changeNowInterviewing,
-  setIsChecked,
   questionCnt,
 }: UseVideoRecordingParams) {
   const router = useRouter();
@@ -52,7 +50,6 @@ export function useVideoRecording({
           if (questionCnt === interviews.nowInterviewing) {
             router.push('/interview/end-interview');
           } else {
-            setIsChecked(true);
             changeNowInterviewing(interviews.nowInterviewing + 1);
           }
 
@@ -82,8 +79,7 @@ export function useVideoRecording({
           }
         },
         onError: (error: any) => {
-          console.error('비디오 업로드 실패:', error);
-          setIsChecked(false);
+          throw new Error('비디오 업로드 실패:', error);
         },
       },
     );
@@ -92,7 +88,6 @@ export function useVideoRecording({
     interviewVideoMutate,
     interviews.nowInterviewing,
     addInterview,
-    setIsChecked,
     webcamRef,
     changeNowInterviewing,
   ]);

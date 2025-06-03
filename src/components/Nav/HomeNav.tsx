@@ -20,7 +20,14 @@ export const HomeNav = ({ breadCrumb = false }: HomeNavProps) => {
   return (
     <Navigation className="absolute flex w-full items-center justify-between px-[60px]">
       <Link href={PATH.HOME}>
-        <Image src="/logo.svg" alt="logo" height={24} width={24} priority />
+        <Image
+          src="/logo.svg"
+          alt="logo"
+          height={24}
+          width={24}
+          priority
+          className="w-auto"
+        />
       </Link>
       {breadCrumb && <BreadCrumb />}
       {data.name && <UserProfile profile={data.profile} name={data.name} />}

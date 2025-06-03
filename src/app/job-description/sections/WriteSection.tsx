@@ -9,13 +9,14 @@ import { useJobDescriptionMutation } from '../hooks/useJobDescriptionMutation';
 
 export default function WriteSection() {
   const router = useRouter();
-  const { jobDescriptionMutate, isPending } = useJobDescriptionMutation();
+  const { jobDescriptionMutate } = useJobDescriptionMutation();
 
   const [jd, setJd] = useState('');
 
   const handleBackClick = () => {
-    router.push(PATH.RESUME);
+    router.back();
   };
+
   const handleNextClick = () => {
     jobDescriptionMutate(
       { jd },
@@ -38,9 +39,7 @@ export default function WriteSection() {
         className="flex justify-end pt-[20px] pb-[48px]"
         back={handleBackClick}
         isAbleBack={true}
-        isAbleNext={
-          jd.length < DOCS_MAX_LENGTH.JD && jd.length > 0 && !isPending
-        }
+        isAbleNext={jd.length < DOCS_MAX_LENGTH.JD && jd.length > 0}
         next={handleNextClick}
       />
     </div>

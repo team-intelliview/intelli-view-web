@@ -46,7 +46,7 @@ export default function RenderingSection() {
           selected={resumeType === 'file'}
         />
       </div>
-      <div>{renderWriteSection[resumeType]}</div>
+      {renderWriteSection[resumeType]}
     </div>
   );
 }

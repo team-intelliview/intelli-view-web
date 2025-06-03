@@ -18,7 +18,7 @@ export default function JDFitness({ rate, description }: JdFitItem) {
         <div className="mt-[24px] flex flex-col gap-[12px]">
           <progress
             className="progress progress-primary-100 w-full"
-            value="80"
+            value={rate}
             max="100"
           />
           <div className="flex justify-between">

@@ -14,7 +14,7 @@ export default function checkCamera() {
               width={52}
               height={52}
               alt="camera"
-              className="bg-gray-0 border-gray-20 mb-[32px] size-[78px] rounded-[14.44px] border-[2.89px] p-3"
+              className="bg-gray-0 border-gray-20 mb-[32px] size-[78px] rounded-[14px] border-[3px] p-3"
             />
             <p className="text-title3 pb-[8px] font-semibold">
               카메라 위치를 체크해 주세요
