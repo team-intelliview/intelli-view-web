@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
-import { getInterviewsQuestion, getInterviewsStatus } from '@/api/interview';
+
 import { REQUEST_STATUS } from '@/constants/api';
 import type { QuestionItem } from '@/types/question';
+import {
+  getInterviewsQuestion,
+  getInterviewsStatus,
+} from '@/lib/api/interview';
 
 export function useQuestionList() {
   const [questionList, setQuestionList] = useState<QuestionItem[]>([]);

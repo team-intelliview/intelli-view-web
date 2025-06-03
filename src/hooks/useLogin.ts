@@ -1,5 +1,5 @@
-import { getUser } from '@/api/auth';
 import { QUERY_KEYS } from '@/constants/api';
+import { getUser } from '@/lib/api/auth';
 import { useSuspenseQuery } from '@tanstack/react-query';
 
 const useLogin = () => {

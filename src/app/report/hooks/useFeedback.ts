@@ -3,12 +3,12 @@ import { useState, useEffect } from 'react';
 import { FeedbackItem, RequestOption } from '@/types';
 import { REQUEST_OPTION } from '@/constants';
 import { REQUEST_STATUS } from '@/constants/api';
+import { getInterviewsStatus } from '@/lib/api/interview';
 import {
   getCoverLetterFeedback,
   getCoverLetterStatus,
   getInterviewFeedback,
-} from '@/api/feedback';
-import { getInterviewsStatus } from '@/api/interview';
+} from '@/lib/api/feedback';
 
 interface Props {
   type: RequestOption;

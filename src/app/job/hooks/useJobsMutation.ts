@@ -1,5 +1,5 @@
-import { postJobInfo } from '@/api/job';
 import { STATUS } from '@/constants/api';
+import { postJobInfo } from '@/lib/api/job';
 import { useMutation } from '@tanstack/react-query';
 
 export const useJobsMutation = () => {

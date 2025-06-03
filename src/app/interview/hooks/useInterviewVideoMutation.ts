@@ -1,5 +1,5 @@
-import { postInterviewVideo } from '@/api/interview';
 import { STATUS } from '@/constants/api';
+import { postInterviewVideo } from '@/lib/api/interview';
 import { useMutation } from '@tanstack/react-query';
 
 export const useInterviewVideoMutation = () => {

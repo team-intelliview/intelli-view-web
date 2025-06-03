@@ -38,10 +38,8 @@ async function reissueToken(): Promise<boolean> {
 
     if (!accessToken || !refreshToken) {
       return false;
-    }
-
-    if (typeof window !== 'undefined') {
-      setTokens(accessToken, refreshToken);
+    } else {
+      setTokens('ACCESS_TOKEN', accessToken);
     }
 
     return true;

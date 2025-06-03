@@ -14,10 +14,9 @@ export function getRefreshToken(): string | null {
   return sessionStorage.getItem('REFRESH_TOKEN');
 }
 
-export function setTokens(accessToken: string, refreshToken: string) {
+export function setTokens(name: string, token: string) {
   if (typeof window === 'undefined') return;
-  sessionStorage.setItem('ACCESS_TOKEN', accessToken);
-  sessionStorage.setItem('REFRESH_TOKEN', refreshToken);
+  sessionStorage.setItem(name, token);
 }
 
 export function removeTokens() {

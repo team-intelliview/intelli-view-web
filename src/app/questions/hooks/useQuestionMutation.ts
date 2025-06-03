@@ -1,5 +1,5 @@
-import { patchInterviewsQuestion } from '@/api/interview';
 import { STATUS } from '@/constants/api';
+import { patchInterviewsQuestion } from '@/lib/api/interview';
 import { useMutation } from '@tanstack/react-query';
 
 export const useQuestionMutation = () => {

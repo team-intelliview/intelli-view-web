@@ -1,5 +1,5 @@
-import { postCoverLetter } from '@/api/coverLetter';
 import { STATUS } from '@/constants/api';
+import { postCoverLetter } from '@/lib/api/coverLetter';
 import { useMutation } from '@tanstack/react-query';
 
 export const useCoverLetterMutation = () => {
