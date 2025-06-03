@@ -2,13 +2,6 @@ import { createURL, END_POINTS } from '@/constants/api';
 import type { FeedbackItem } from '@/types';
 import { fetchRequest } from '@/utils';
 
-interface GetCoverLetterFeedbackProps {
-  coverLetterId: string;
-}
-interface GetInterviewFeedbackProps {
-  interviewId: string;
-}
-
 export const getCoverLetterFeedback = async () => {
   const coverLetterId = sessionStorage.getItem('coverLetterId');
 
@@ -19,9 +12,9 @@ export const getCoverLetterFeedback = async () => {
   return data;
 };
 
-export const getCoverLetterStatus = async ({
-  coverLetterId,
-}: GetCoverLetterFeedbackProps) => {
+export const getCoverLetterStatus = async () => {
+  const coverLetterId = sessionStorage.getItem('coverLetterId');
+
   const { data } = await fetchRequest<string>({
     url: createURL(END_POINTS.COVER_LETTER_STATUS(coverLetterId)),
   });
@@ -39,9 +32,9 @@ export const getInterviewFeedback = async () => {
   return data;
 };
 
-export const getInterviewFeedbackStatus = async ({
-  interviewId,
-}: GetInterviewFeedbackProps) => {
+export const getInterviewFeedbackStatus = async () => {
+  const interviewId = sessionStorage.getItem('interviewId');
+
   const { data } = await fetchRequest<string>({
     url: createURL(END_POINTS.INTERVIEW_STATUS(interviewId)),
   });

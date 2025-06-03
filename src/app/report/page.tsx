@@ -2,7 +2,7 @@
 
 import PageLayout from '../PageLayout';
 import Content from '@/components/Content';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   DetailReportSection,
   OverallReviewSection,
@@ -13,17 +13,16 @@ import {
 import { useContentState } from '@/hooks';
 import { REQUEST_OPTION, REPORT_OPTION } from '@/constants';
 import type { FeedbackItem, ReportOption } from '@/types';
-import { getCoverLetterFeedback, getInterviewFeedback } from '@/api/feedback';
 import Loading from './loading';
-import { report } from '@/mocks';
+import { useFeedback } from './hooks/useFeedback';
 
 export default function Feedback() {
   const { type } = useContentState();
+  const { feedback, isPollingComplete } = useFeedback({ type });
 
   const [selected, setSelected] = useState<ReportOption>(
     REPORT_OPTION.DASH_BOARD,
   );
-  const [feedback, setFeedback] = useState<FeedbackItem | null>();
 
   const renderContent = () => {
     const isDashBoard = selected === REPORT_OPTION.DASH_BOARD;
@@ -40,26 +39,7 @@ export default function Feedback() {
     return contentMap[type] || null;
   };
 
-  useEffect(() => {
-    const fetchFeedback = async () => {
-      switch (type) {
-        case REQUEST_OPTION.COVER_LETTER:
-          const coverLetterFeedback = await getCoverLetterFeedback();
-          setFeedback(coverLetterFeedback);
-          break;
-        case REQUEST_OPTION.INTERVIEW:
-          const interviewFeedback = await getInterviewFeedback();
-          setFeedback(interviewFeedback);
-          break;
-        default:
-          setFeedback(null);
-      }
-    };
-
-    fetchFeedback();
-  }, []);
-
-  if (!feedback) return <Loading />;
+  if (!isPollingComplete || !feedback) return <Loading />;
 
   return (
     <PageLayout
