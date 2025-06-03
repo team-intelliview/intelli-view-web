@@ -27,7 +27,6 @@ export default function DropdownReport({
           key={index}
           className={cn(
             'text-body1 text-gray-80 font-medium transition-colors duration-200 hover:font-bold',
-            index === 4 && 'decoration-red text-red hover:text-none underline',
           )}
         >
           {sentence}{' '}

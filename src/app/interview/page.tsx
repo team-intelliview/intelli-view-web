@@ -11,7 +11,7 @@ const QuestionBoxSection = lazy(() => import('./sections/QuestionBoxSection'));
 const VideoSection = lazy(() => import('./sections/VideoSection'));
 const SideSection = lazy(() => import('./sections/SideSection'));
 
-export const Interview = () => {
+const Interview = () => {
   const { data, isLoading } = useInterviewQuestions();
   const { resetInterview } = useInterview();
 
