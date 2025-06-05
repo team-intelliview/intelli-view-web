@@ -24,21 +24,27 @@ export const postResume = async ({
 
 export const getResume = async () => {
   const url = createURL(END_POINTS.RESUMES);
+  try {
+    const { status, data } = await fetchRequest<ResumeItem>({ url });
 
-  const { status, message, data } = await fetchRequest<ResumeItem>({ url });
-
-  if (status === STATUS.OK) {
-    return data;
-  } else if (status === STATUS.NOT_FOUND) {
-    const resume: ResumeItem = {
+    if (status === STATUS.OK) {
+      return data;
+    } else {
+      const data: ResumeItem = {
+        education: '',
+        employment: '',
+        certification: '',
+        etc: '',
+      };
+      return data;
+    }
+  } catch (error) {
+    const data: ResumeItem = {
       education: '',
       employment: '',
       certification: '',
       etc: '',
     };
-
-    return resume;
-  } else {
-    throw new Error(message);
+    return data;
   }
 };

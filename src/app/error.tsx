@@ -12,7 +12,7 @@ export default function Error() {
   };
 
   return (
-    <div className="flex h-screen w-screen flex-col items-center justify-center text-2xl">
+    <div className="flex h-screen w-screen flex-col items-center justify-center space-y-4 text-2xl">
       <p>문제가 발생했어요</p>
       <Button text="HOME" variant="primary" onClick={handleHomeButtonClick} />
     </div>
