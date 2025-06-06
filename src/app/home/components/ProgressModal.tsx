@@ -36,14 +36,14 @@ const ProgressModal = () => {
             text="대면으로 진행해요"
             icon="🏢"
             onClick={(e) =>
-              handleInterviewTypeClick(INTERVIEW_OPTION.OFFLINE, e)
+              handleInterviewTypeClick(INTERVIEW_OPTION.FACE_TO_FACE, e)
             }
           />
           <ModuleButton
             text="비대면으로 진행해요"
             icon="💻"
             onClick={(e) =>
-              handleInterviewTypeClick(INTERVIEW_OPTION.ONLINE, e)
+              handleInterviewTypeClick(INTERVIEW_OPTION.UNTACT, e)
             }
           />
         </div>

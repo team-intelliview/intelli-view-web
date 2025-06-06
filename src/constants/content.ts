@@ -4,8 +4,8 @@ export const REQUEST_OPTION = {
 } as const;
 
 export const INTERVIEW_OPTION = {
-  OFFLINE: 'offline',
-  ONLINE: 'online',
+  UNTACT: 'UNTACT',
+  FACE_TO_FACE: 'FACE_TO_FACE',
 } as const;
 
 export const DOCS_MAX_LENGTH = {

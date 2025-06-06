@@ -18,9 +18,9 @@ export function toKoreanRequestType({
 }: toKoreanRequestTypeProps) {
   switch (type) {
     case REQUEST_OPTION.INTERVIEW:
-      if (option === INTERVIEW_OPTION.OFFLINE) {
+      if (option === INTERVIEW_OPTION.FACE_TO_FACE) {
         return '대면 면접';
-      } else if (option === INTERVIEW_OPTION.ONLINE) {
+      } else if (option === INTERVIEW_OPTION.UNTACT) {
         return '비대면 면접';
       } else return 'AI 면접 준비';
     case REQUEST_OPTION.COVER_LETTER:
