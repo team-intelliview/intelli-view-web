@@ -22,6 +22,7 @@ export default function QuestionInput({
       id={String(id)}
       placeholder="질문 항목을 입력해주세요."
       label={`질문 ${id}`}
+      maxLength={COVER_LETTER_MAX_LENGTH.QUESTION}
       value={question}
       onChange={(e) => onChange('question', e.target.value)}
     >

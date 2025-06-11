@@ -16,15 +16,14 @@ export function useQuestionList() {
 
     const pollingStatus = async () => {
       try {
-        const result = await getInterviewsStatus();
-        const isSuccess = result === REQUEST_STATUS.COMPLETED;
-
         if (!isMounted) return;
 
-        if (isSuccess) {
+        const result = await getInterviewsStatus();
+
+        if (result === REQUEST_STATUS.COMPLETED) {
           setIsPollingComplete(true);
         } else {
-          setTimeout(pollingStatus, 2000);
+          setTimeout(pollingStatus, 1000);
         }
       } catch (error) {
         console.error('Polling failed:', error);
