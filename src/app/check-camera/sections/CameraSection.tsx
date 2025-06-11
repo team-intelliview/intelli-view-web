@@ -1,5 +1,6 @@
 'use client';
 
+import { MODAL_PATH } from '@/constants';
 import MovingButton from '@/widgets/MovingButton';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -16,7 +17,7 @@ export default function CameraSection() {
 
   const handleBackClick = () => {};
   const handleNextClick = () => {
-    router.push('/check-camera/finish-check');
+    router.push(MODAL_PATH.FINISH_CHECK);
   };
 
   return (

@@ -4,12 +4,13 @@ import Navigation from './Navigation';
 import Chip from '../Chip';
 import Button from '@/components/Button';
 import { useRouter } from 'next/navigation';
+import { MODAL_PATH } from '@/constants';
 
 export default function InterviewNav() {
   const router = useRouter();
 
   const handleQuitInterview = () => {
-    router.push('/interview/quit-interview');
+    router.push(MODAL_PATH.QUIT_INTERVIEW);
   };
 
   return (
