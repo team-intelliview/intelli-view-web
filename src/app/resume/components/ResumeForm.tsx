@@ -40,7 +40,6 @@ const ResumeForm = ({
   };
 
   if (isLoading) return <Loading />;
-  if (!data) return null;
 
   return (
     <div className="flex flex-col">
