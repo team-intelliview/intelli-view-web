@@ -1,5 +1,3 @@
-'use client';
-
 import QuitInterviewModal from '../../components/QuitInterviewModal';
 
 const QuitModal = () => {

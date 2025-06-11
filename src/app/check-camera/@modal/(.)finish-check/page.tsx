@@ -1,5 +1,3 @@
-'use client';
-
 import FinishCheckModal from '../../components/FinishCheckModal';
 
 const Modal = () => {
