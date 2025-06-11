@@ -3,9 +3,9 @@
 import { PATH, REQUEST_OPTION } from '@/constants';
 import { useContentState } from '@/hooks';
 import { cn, toKoreanRequestType } from '@/utils';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import ArrowRight from '@assets/icons/arrow_right.svg';
 
 const Process = {
   [REQUEST_OPTION.INTERVIEW]: [
@@ -46,7 +46,7 @@ export default function BreadCrumb() {
         setIsNow(Process[type].length - 1);
         break;
     }
-  }, []);
+  }, [pathname]);
 
   const title =
     type === REQUEST_OPTION.COVER_LETTER
@@ -59,12 +59,7 @@ export default function BreadCrumb() {
         <li className="px-[12px] py-[4px]">{title}</li>
         {Process[type].map((item, index) => (
           <div className="flex items-center" key={index}>
-            <Image
-              src="/icons/arrow_right.svg"
-              width={24}
-              height={24}
-              alt="arrow"
-            />
+            <ArrowRight width={24} height={24} />
             <li
               className={cn(
                 'px-[12px] py-[4px]',

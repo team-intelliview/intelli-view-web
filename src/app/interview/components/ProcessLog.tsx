@@ -1,45 +1,26 @@
-'use client';
-
 import Chip from '@/components/Chip';
 import { useInterviewState } from '@/hooks/useInterview';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import AnnotationTyping from '@assets/icons/annotation_typing.svg';
+import List from '@assets/icons/list.svg';
 
 interface ProcessLogProps {
   entireCnt: number;
 }
 
 export default function ProcessLog({ entireCnt }: ProcessLogProps) {
-  const router = useRouter();
   const { interviews } = useInterviewState();
-
-  useEffect(() => {
-    if (
-      interviews.logList.length > 0 &&
-      interviews.logList.length === entireCnt
-    ) {
-      router.push('/interview/end-interview');
-    }
-  }, [interviews, entireCnt]);
 
   return (
     <div className="border-gray-20 flex w-full flex-col gap-[20px] rounded-[16px] border bg-white px-[20px] py-[24px]">
       <p className="text-gray-90 font-semibold">면접 진행 상황</p>
       <div className="bg-primary-40 border-light flex w-fit gap-[10px] rounded-[12px] border px-[12px] py-[8px]">
         <p className="flex items-center gap-[8px]">
-          <Image
-            src="/icons/annotation_typing.svg"
-            width={20}
-            height={20}
-            alt="finished"
-          />
+          <AnnotationTyping width={20} height={20} />
           {interviews.logList.length}개 완료
         </p>
         <hr />
         <p className="flex items-center gap-[8px]">
-          <Image src="/icons/list.svg" width={20} height={20} alt="entire" />총
-          질문 {entireCnt}개
+          <List width={20} height={20} />총 질문 {entireCnt}개
         </p>
       </div>
       <ul className="timeline timeline-vertical timeline-compact">
@@ -70,7 +51,7 @@ export default function ProcessLog({ entireCnt }: ProcessLogProps) {
                     src={image}
                     width={112}
                     height={65}
-                    alt="processImage"
+                    alt="면접 사진"
                     className="rounded-[8px] object-cover"
                   />
                 ) : (

@@ -1,8 +1,9 @@
 'use client';
 
 import { VideoItem } from '@/types';
-import Image from 'next/image';
 import { useState } from 'react';
+import ArrowLeft from '@assets/icons/arrow_left_simple.svg';
+import ArrowRight from '@assets/icons/arrow_right.svg';
 
 export default function InterviewVideo({
   videoData,
@@ -29,23 +30,11 @@ export default function InterviewVideo({
         className="mx-auto flex w-full items-center rounded-[18px]"
       />
       <div className="flex w-full items-center justify-center gap-8">
-        <Image
-          src="/icons/arrow_left.svg"
-          alt="arrow_left"
-          width={24}
-          height={24}
-          onClick={handleArrowBackButtonClick}
-        />
+        <ArrowLeft onClick={handleArrowBackButtonClick} />
         <p className="text-headline2 text-gray-80 font-medium">
           {currentIndex + 1}번 질문
         </p>
-        <Image
-          src="/icons/arrow_right.svg"
-          alt="arrow_right"
-          width={24}
-          height={24}
-          onClick={handleArrowNextButtonClick}
-        />
+        <ArrowRight onClick={handleArrowNextButtonClick} />
       </div>
     </>
   );
