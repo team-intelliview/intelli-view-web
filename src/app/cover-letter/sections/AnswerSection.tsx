@@ -22,7 +22,7 @@ export default function AnswerSection() {
     useCoverLetterMutation();
   const { interviewQuestionMutate, isPending: interviewQuestionIsPending } =
     useInterviewQuestionMutation();
-  const { type } = useContentState();
+  const { type, interviewType } = useContentState();
 
   const [questionList, setQuestionList] = useState<Array<CoverLetterItem>>([
     defaultValue,
@@ -37,7 +37,7 @@ export default function AnswerSection() {
   const handleNextClick = () => {
     type === REQUEST_OPTION.INTERVIEW
       ? interviewQuestionMutate(
-          { contents: questionList },
+          { contents: questionList, interviewType },
           {
             onSuccess: () => router.push(PATH.QUESTIONS),
           },
