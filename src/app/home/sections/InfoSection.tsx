@@ -2,8 +2,8 @@
 
 import { PATH } from '@/constants';
 import useLogin from '@/hooks/useLogin';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import ArrowRight from '@assets/icons/arrow_right.svg';
 
 const InfoSection = () => {
   const router = useRouter();
@@ -25,13 +25,7 @@ const InfoSection = () => {
         onClick={handleMyResumeClick}
       >
         <p className="text-gray-90 text-heading2 font-semibold">내 이력서</p>
-        <Image
-          width={24}
-          height={24}
-          src="/icons/arrow_right.svg"
-          alt="right"
-          className="h-auto w-auto"
-        />
+        <ArrowRight width={24} height={24} className="h-auto w-auto" />
       </button>
     </div>
   );

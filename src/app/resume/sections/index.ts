@@ -1,1 +1,1 @@
-export { default as RenderingSection } from './RenderingSection';
+export { RenderingSection } from './RenderingSection';

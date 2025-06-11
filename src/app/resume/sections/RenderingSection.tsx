@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FileInput, ResumeForm } from '../components';
 
-export default function RenderingSection() {
+export const RenderingSection = () => {
   const router = useRouter();
   const [resumeType, setResumeType] = useState('write');
 
@@ -17,7 +17,7 @@ export default function RenderingSection() {
     router.push(PATH.JOB_DESCRIPTION);
   };
 
-  const renderWriteSection = {
+  const resumeInput = {
     write: (
       <ResumeForm
         hasMovingButton={true}
@@ -46,7 +46,7 @@ export default function RenderingSection() {
           selected={resumeType === 'file'}
         />
       </div>
-      {renderWriteSection[resumeType]}
+      {resumeInput[resumeType]}
     </div>
   );
-}
+};

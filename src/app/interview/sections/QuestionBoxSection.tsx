@@ -13,8 +13,7 @@ export default function QuestionBoxSection({
 }: QuestionBoxSectionProps) {
   const { nowInterviewing } = useNowInterviewing();
 
-  const currentIndex = nowInterviewing - 1;
-  const currentQuestion = questionList[currentIndex];
+  const { index, question } = questionList[nowInterviewing - 1];
 
   return (
     <div className="border-gray-20 flex gap-[20px] rounded-[12px] border bg-white px-[40px] py-[20px]">
@@ -22,12 +21,8 @@ export default function QuestionBoxSection({
         <Paper />
       </div>
       <div className="flex flex-col gap-[8px]">
-        <p className="text-heading1 text-gray-70 font-medium">
-          질문 {currentQuestion?.index}
-        </p>
-        <p className="text-gray-90 text-heading2 font-semibold">
-          {currentQuestion?.question}
-        </p>
+        <p className="text-heading1 text-gray-70 font-medium">질문 {index}</p>
+        <p className="text-gray-90 text-heading2 font-semibold">{question}</p>
       </div>
     </div>
   );

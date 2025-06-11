@@ -1,7 +1,8 @@
 import { createURL, END_POINTS } from '@/constants/api';
-import type { CoverLetterItem, RequestStatus } from '@/types';
+import type { CoverLetterItem, InterviewOption, RequestStatus } from '@/types';
 import { QuestionItem } from '@/types/question';
 import { addSearchParams, fetchRequest } from '@/utils';
+import { getStorageItem } from '@/utils/storage';
 
 interface GetInterviewQuestionResponse {
   contents: Array<QuestionItem>;
@@ -9,6 +10,7 @@ interface GetInterviewQuestionResponse {
 
 interface PostInterviewQuestionProps {
   contents: Array<CoverLetterItem>;
+  interviewType: InterviewOption;
 }
 
 interface PostInterviewQuestionResponse {
@@ -25,7 +27,7 @@ interface PostInterviewVideoProps {
 }
 
 export const getInterviewsQuestion = async () => {
-  const interviewId = sessionStorage.getItem('interviewId');
+  const interviewId = getStorageItem('interviewId');
   const { data } = await fetchRequest<GetInterviewQuestionResponse>({
     url: createURL(END_POINTS.INTERVIEW_QUESTION(interviewId)),
   });
@@ -35,13 +37,14 @@ export const getInterviewsQuestion = async () => {
 
 export const postInterviewQuestion = async ({
   contents,
+  interviewType,
 }: PostInterviewQuestionProps) => {
-  const jobId = sessionStorage.getItem('jobId');
-  const type = 'FACE_TO_FACE';
+  const jobId = getStorageItem('jobId');
+
   const url = createURL(END_POINTS.INTERVIEW_QUESTION_LIST);
 
   const response = await fetchRequest<PostInterviewQuestionResponse>({
-    url: addSearchParams(url, { jobId, type }),
+    url: addSearchParams(url, { jobId, type: interviewType }),
     options: { method: 'POST', body: JSON.stringify({ contents }) },
   });
 
@@ -49,7 +52,7 @@ export const postInterviewQuestion = async ({
 };
 
 export const getInterviewsStatus = async () => {
-  const interviewId = sessionStorage.getItem('interviewId');
+  const interviewId = getStorageItem('interviewId');
 
   const { data } = await fetchRequest<RequestStatus>({
     url: createURL(END_POINTS.INTERVIEW_STATUS(interviewId)),
@@ -61,7 +64,7 @@ export const getInterviewsStatus = async () => {
 export const patchInterviewsQuestion = async ({
   contents,
 }: PatchInterviewsQuestionProps) => {
-  const interviewId = sessionStorage.getItem('interviewId');
+  const interviewId = getStorageItem('interviewId');
   const url = createURL(END_POINTS.INTERVIEW_QUESTION(interviewId));
 
   const response = await fetchRequest<never>({
@@ -76,7 +79,7 @@ export const postInterviewVideo = async ({
   index,
   file,
 }: PostInterviewVideoProps) => {
-  const interviewId = sessionStorage.getItem('interviewId');
+  const interviewId = getStorageItem('interviewId');
   const url = createURL(END_POINTS.INTERVIEW_VIDEO(interviewId));
 
   const response = await fetchRequest<never>({
@@ -87,5 +90,3 @@ export const postInterviewVideo = async ({
 
   return response;
 };
-
-export const postRecreateInterviewQuestion = async () => {};
