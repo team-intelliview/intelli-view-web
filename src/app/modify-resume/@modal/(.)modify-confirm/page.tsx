@@ -1,5 +1,3 @@
-'use client';
-
 import { ModifyConfirmModal } from '../../components';
 
 const ConfirmModal = () => {

@@ -1,5 +1,3 @@
-'use client';
-
 import CompleteInterviewModal from '../../components/CompleteInterviewModal';
 
 const EndModal = () => {

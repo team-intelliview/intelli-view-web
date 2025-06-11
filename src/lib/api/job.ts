@@ -1,6 +1,7 @@
 import { createURL, END_POINTS } from '@/constants/api';
 import type { JobInfoItem } from '@/types';
 import { fetchRequest } from '@/utils';
+import { getStorageItem } from '@/utils/storage';
 
 interface PutJobInfoParams {
   jd: string;
@@ -21,7 +22,7 @@ export const postJobInfo = async ({ company, position }: JobInfoItem) => {
 };
 
 export const putJobDescription = async ({ jd }: PutJobInfoParams) => {
-  const jobId = sessionStorage.getItem('jobId');
+  const jobId = getStorageItem('jobId');
   const url = createURL(END_POINTS.JD(jobId));
 
   const response = await fetchRequest<string>({

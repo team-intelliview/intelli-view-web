@@ -1,6 +1,7 @@
 import { createURL, END_POINTS, STATUS } from '@/constants/api';
 import type { ResumeItem } from '@/types';
 import { fetchRequest } from '@/utils';
+import { toast } from 'react-toastify';
 
 export const postResume = async ({
   education,
@@ -24,27 +25,32 @@ export const postResume = async ({
 
 export const getResume = async () => {
   const url = createURL(END_POINTS.RESUMES);
-  try {
-    const { status, data } = await fetchRequest<ResumeItem>({ url });
 
+  const { status, data } = await fetchRequest<ResumeItem>({ url });
+
+  try {
     if (status === STATUS.OK) {
       return data;
     } else {
-      const data: ResumeItem = {
+      const resume: ResumeItem = {
         education: '',
         employment: '',
         certification: '',
         etc: '',
       };
-      return data;
+
+      return resume;
     }
-  } catch (error) {
-    const data: ResumeItem = {
+  } catch {
+    toast('이력서 조회에 실패했어요. 다시 작성해주세요.');
+
+    const resume: ResumeItem = {
       education: '',
       employment: '',
       certification: '',
       etc: '',
     };
-    return data;
+
+    return resume;
   }
 };

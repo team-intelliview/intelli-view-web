@@ -1,9 +1,10 @@
 import { createURL, END_POINTS } from '@/constants/api';
 import type { FeedbackItem } from '@/types';
 import { fetchRequest } from '@/utils';
+import { getStorageItem } from '@/utils/storage';
 
 export const getCoverLetterFeedback = async () => {
-  const coverLetterId = sessionStorage.getItem('coverLetterId');
+  const coverLetterId = getStorageItem('coverLetterId');
 
   const { data } = await fetchRequest<FeedbackItem>({
     url: createURL(END_POINTS.COVER_LETTER_FEEDBACK(coverLetterId)),
@@ -13,7 +14,7 @@ export const getCoverLetterFeedback = async () => {
 };
 
 export const getCoverLetterStatus = async () => {
-  const coverLetterId = sessionStorage.getItem('coverLetterId');
+  const coverLetterId = getStorageItem('coverLetterId');
 
   const { data } = await fetchRequest<string>({
     url: createURL(END_POINTS.COVER_LETTER_STATUS(coverLetterId)),
@@ -23,7 +24,7 @@ export const getCoverLetterStatus = async () => {
 };
 
 export const getInterviewFeedback = async () => {
-  const interviewId = sessionStorage.getItem('interviewId');
+  const interviewId = getStorageItem('interviewId');
 
   const { data } = await fetchRequest<FeedbackItem>({
     url: createURL(END_POINTS.INTERVIEW_FEEDBACK(interviewId)),
@@ -33,7 +34,7 @@ export const getInterviewFeedback = async () => {
 };
 
 export const getInterviewFeedbackStatus = async () => {
-  const interviewId = sessionStorage.getItem('interviewId');
+  const interviewId = getStorageItem('interviewId');
 
   const { data } = await fetchRequest<string>({
     url: createURL(END_POINTS.INTERVIEW_STATUS(interviewId)),

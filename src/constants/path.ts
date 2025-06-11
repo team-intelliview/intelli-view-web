@@ -12,3 +12,11 @@ export const PATH = {
   REPORT: '/report',
   MODIFY_RESUME: '/modify-resume',
 };
+
+export const MODAL_PATH = {
+  INTERVIEW_TYPE: '/home/interview-type',
+  END_INTERVIEW: '/interview/end-interview',
+  QUIT_INTERVIEW: '/interview/quit-interview',
+  FINISH_CHECK: '/check-camera/finish-check',
+  MODIFY_CONFIRM: '/modify-resume/modify-confirm',
+};

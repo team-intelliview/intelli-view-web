@@ -4,8 +4,8 @@ export const REQUEST_OPTION = {
 } as const;
 
 export const INTERVIEW_OPTION = {
-  OFFLINE: 'offline',
-  ONLINE: 'online',
+  UNTACT: 'UNTACT',
+  FACE_TO_FACE: 'FACE_TO_FACE',
 } as const;
 
 export const DOCS_MAX_LENGTH = {
@@ -18,6 +18,7 @@ export const DOCS_MAX_LENGTH = {
 } as const;
 
 export const COVER_LETTER_MAX_LENGTH = {
+  QUESTION: 100,
   ANSWER: 1500,
 } as const;
 

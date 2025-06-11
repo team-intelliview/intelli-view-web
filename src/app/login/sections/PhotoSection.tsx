@@ -6,9 +6,10 @@ export default function PhotoSection() {
       <Image
         src="/images/main.webp"
         alt="데모 이미지"
-        className="absolute"
         width={561}
         height={500}
+        className="absolute"
+        priority
       />
     </div>
   );

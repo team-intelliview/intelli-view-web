@@ -23,20 +23,17 @@ export const useFeedback = ({ type }: Props) => {
 
     const pollingStatus = async () => {
       try {
+        if (!isMounted) return;
+
         const result =
           type === REQUEST_OPTION.INTERVIEW
             ? await getInterviewsStatus()
             : await getCoverLetterStatus();
-        const isSuccess = result === REQUEST_STATUS.COMPLETED;
 
-        if (!isMounted) return;
-
-        if (isSuccess) {
+        if (result === REQUEST_STATUS.COMPLETED) {
           setIsPollingComplete(true);
-        } else if (result === REQUEST_STATUS.REQUEST_FAILED) {
-          console.error('Request failed');
         } else {
-          setTimeout(pollingStatus, 2000);
+          setTimeout(pollingStatus, 1000);
         }
       } catch (error) {
         console.error('Polling failed:', error);

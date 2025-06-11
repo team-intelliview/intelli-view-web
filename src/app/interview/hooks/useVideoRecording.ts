@@ -5,6 +5,8 @@ import { useMediaRecorder } from './useMediaRecorder';
 import { InterviewInfo } from '@/atoms/interview';
 import { getVideoDuration } from '../utils/video';
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
+import { MODAL_PATH } from '@/constants';
 
 interface UseVideoRecordingParams {
   webcamRef: React.RefObject<any>;
@@ -33,6 +35,7 @@ export function useVideoRecording({
   }, [startRecording]);
 
   const handleStopRecording = useCallback(async () => {
+    const screenshot = webcamRef.current?.getScreenshot();
     const webmBlob = await stopRecording();
 
     if (webmBlob.size === 0) {
@@ -48,13 +51,12 @@ export function useVideoRecording({
       {
         onSuccess: async () => {
           if (questionCnt === interviews.nowInterviewing) {
-            router.push('/interview/end-interview');
+            router.push(MODAL_PATH.END_INTERVIEW);
           } else {
             changeNowInterviewing(interviews.nowInterviewing + 1);
           }
 
           const duration = await getVideoDuration(webmBlob);
-          const screenshot = webcamRef.current?.getScreenshot();
 
           if (screenshot) {
             const byteString = atob(screenshot.split(',')[1]);
@@ -78,8 +80,8 @@ export function useVideoRecording({
             });
           }
         },
-        onError: (error: any) => {
-          throw new Error('비디오 업로드 실패:', error);
+        onError: () => {
+          toast.error('비디오 업로드에 실패했어요. 다시 시도해주세요');
         },
       },
     );

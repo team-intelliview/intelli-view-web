@@ -18,10 +18,6 @@ const nextConfig = {
   images: {
     domains: ['lh3.googleusercontent.com', 'img1.kakaocdn.net'],
   },
-  // HTTPS 관련 설정
-  server: {
-    https: true,
-  },
   // 빌드 시 정적 파일 처리
   output: 'standalone',
 };
